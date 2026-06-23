@@ -1,0 +1,928 @@
+'use client';
+
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate, motionValue, LayoutGroup } from 'framer-motion';
+import { useTranslations } from 'next-intl';
+import { Search, SortAsc, SortDesc, ExternalLink, X, Calendar, Building2, Trophy, Medal, Award, Target, ChevronRight, ChevronLeft, MousePointer2, Eye, Share2, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { cn, formatDate } from '@/lib/utils';
+import { portfolioData } from '@/data/portfolio';
+import { Achievement } from '@/types';
+import dynamic from 'next/dynamic';
+
+const FallingText = dynamic(() => import('@/components/effects/FallingText'), {
+    ssr: false,
+    loading: () => <div className="h-[400px] w-full animate-pulse bg-zinc-100/5 dark:bg-zinc-800/5 rounded-xl" />
+});
+import CertificateHeroScroll from '@/components/sections/CertificateHeroScroll';
+import { usePerformance } from '@/hooks/usePerformance';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+
+const staggerContainer = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
+const staggerItem = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+};
+
+const AchievementCard = React.memo(React.forwardRef<HTMLDivElement, {
+    achievement: Achievement;
+    onClick: () => void;
+    index: number;
+    isLowPowerMode?: boolean;
+}>(
+    ({ achievement, onClick, index, isLowPowerMode }, ref) => {
+        const [isHovered, setIsHovered] = useState(false);
+        const mouseX = useMotionValue(0);
+        const mouseY = useMotionValue(0);
+
+        const rafRef = React.useRef<number | null>(null);
+
+        const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+            if (isLowPowerMode) return;
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+            const { clientX, clientY, currentTarget } = e;
+            const { left, top } = currentTarget.getBoundingClientRect();
+
+            rafRef.current = requestAnimationFrame(() => {
+                mouseX.set(clientX - left);
+                mouseY.set(clientY - top);
+            });
+        };
+
+        // Cleanup on unmount
+        React.useEffect(() => {
+            return () => {
+                if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            };
+        }, []);
+
+        const springConfig = { stiffness: 150, damping: 20 };
+        const mouseXSpring = useSpring(mouseX, springConfig);
+        const mouseYSpring = useSpring(mouseY, springConfig);
+
+        const categoryConfig: Record<string, { gradient: string; icon: typeof Trophy }> = {
+            certification: { gradient: 'from-zinc-700 via-zinc-600 to-zinc-500', icon: Award },
+            award: { gradient: 'from-neutral-800 via-neutral-700 to-neutral-600', icon: Trophy },
+            recognition: { gradient: 'from-stone-700 via-stone-600 to-stone-500', icon: Medal },
+            publication: { gradient: 'from-slate-700 via-slate-600 to-slate-500', icon: Award },
+            competition: { gradient: 'from-gray-700 via-gray-600 to-gray-500', icon: Target }
+        };
+
+        const config = categoryConfig[achievement.category.toLowerCase()] || categoryConfig.award;
+        const IconComponent = config.icon;
+
+        const spotlightBackground = useMotionTemplate`
+            radial-gradient(
+                350px circle at ${mouseXSpring}px ${mouseYSpring}px,
+                var(--accent-spotlight, rgba(255, 255, 255, 0.08)),
+                transparent 80%
+            )
+        `;
+
+        return (
+            <div
+                className="relative group block p-2 h-full w-full"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onMouseMove={handleMouseMove}
+                onClick={onClick}
+            >
+                <AnimatePresence>
+                    {isHovered && (
+                        <motion.span
+                            className="absolute inset-0 h-full w-full bg-foreground/[0.05] dark:bg-slate-800/[0.2] block rounded-3xl z-0"
+                            layoutId="hoverBackground"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1, transition: { duration: 0.15 } }}
+                            exit={{ opacity: 0, transition: { duration: 0.15, delay: 0.2 } }}
+                        />
+                    )}
+                </AnimatePresence>
+
+                <motion.div
+                    ref={ref}
+                    layout
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ delay: index * 0.05, duration: 0.5, type: "spring", stiffness: 100 }}
+                    whileHover={{ y: -4 }}
+                    className={cn(
+                        "relative bg-card/90 dark:bg-card/40 rounded-2xl overflow-hidden border-2 border-zinc-400 dark:border-border/40 group-hover:border-foreground/20 transition-all duration-500 shadow-xl dark:shadow-none group-hover:shadow-2xl z-20 cursor-pointer",
+                        !isLowPowerMode && "backdrop-blur-md"
+                    )}
+                    style={{ willChange: "transform, opacity" }}
+                >
+                    {/* Animated Spotlight Effect */}
+                    {!isLowPowerMode && (
+                        <motion.div
+                            className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            style={{ background: spotlightBackground }}
+                        />
+                    )}
+
+                    {/* Integrated Header: Image + Gradient/Icon */}
+                    <div className={cn(
+                        "relative h-44 w-full overflow-hidden transition-all duration-500 bg-gradient-to-br",
+                        config.gradient
+                    )}>
+                        {achievement.image ? (
+                            <>
+                                {achievement.image.endsWith('.pdf') ? (
+                                    <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-700">
+                                        <iframe
+                                            src={`${achievement.image}#toolbar=0&navpanes=0&scrollbar=0`}
+                                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                                            title={achievement.title}
+                                            loading="lazy"
+                                        />
+                                        {/* Overlay to capture clicks and prevent iframe interaction in card */}
+                                        <div className="absolute inset-0 z-10 bg-transparent" />
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={achievement.image}
+                                        alt={achievement.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                                        loading="lazy"
+                                    />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                            </>
+                        ) : (
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                                initial={{ x: '-100%' }}
+                                whileHover={{ x: '100%' }}
+                                transition={{ duration: 0.6 }}
+                            />
+                        )}
+
+                        {/* Category Icon Badge */}
+                        <motion.div
+                            className="absolute top-4 right-4 p-2.5 rounded-xl bg-white/80 dark:bg-foreground/10 backdrop-blur-md border border-foreground/10 shadow-lg z-20"
+                            whileHover={{ rotate: 15, scale: 1.1 }}
+                        >
+                            <IconComponent className="w-4 h-4 text-foreground dark:text-white" />
+                        </motion.div>
+
+                        {/* Type/Category Tags in Header */}
+                        <div className="absolute top-4 left-4 flex gap-2 z-20">
+                            <span className={cn(
+                                "px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider border border-foreground/10 text-foreground dark:text-white/90 shadow-sm",
+                                !isLowPowerMode ? "bg-white/80 dark:bg-foreground/10 backdrop-blur-md" : "bg-white/90 dark:bg-black/40"
+                            )}>
+                                {achievement.type || achievement.category}
+                            </span>
+                        </div>
+
+                        {/* Credential ID - Mono style */}
+                        <div className="absolute bottom-4 left-4 z-20">
+                            <div className="text-[10px] font-mono text-foreground/50 dark:text-white/50 uppercase tracking-widest mb-1">
+                                {achievement.credentialId ? achievement.credentialId : "Verified Credential"}
+                            </div>
+                        </div>
+
+                        {/* Date Overlay */}
+                        <div className="absolute bottom-4 right-4 z-20 px-2.5 py-1 rounded-lg bg-foreground/10 backdrop-blur-md border border-foreground/10">
+                            <div className="flex items-center gap-1.5">
+                                <Calendar className="w-3 h-3 text-foreground/60 dark:text-white/60" />
+                                <span className="text-[10px] text-foreground/90 dark:text-white/90 font-bold">
+                                    {new Date(achievement.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="p-6 relative z-20 bg-gradient-to-b from-transparent to-card/20">
+                        <h3 className="text-lg font-bold leading-tight mb-3 group-hover:text-foreground transition-colors line-clamp-2 min-h-[3rem]">
+                            {achievement.title}
+                        </h3>
+
+                        <div className="flex items-center gap-2 mb-4">
+                            <Building2 className="w-3.5 h-3.5 text-muted-foreground/60" />
+                            <span className="text-[11px] text-muted-foreground font-medium">{achievement.issuer}</span>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-4 border-t border-border/20">
+                            <div className="flex items-center gap-2">
+                                <Eye className="w-4 h-4 text-muted-foreground/40" />
+                                <span className="text-[10px] text-muted-foreground/50 font-bold uppercase tracking-wider">Expand Archive</span>
+                            </div>
+                            <motion.div
+                                animate={{ x: isHovered ? [0, 4, 0] : 0 }}
+                                transition={{ duration: 1.2, repeat: Infinity }}
+                            >
+                                <ChevronRight className="w-4 h-4 text-muted-foreground/50" />
+                            </motion.div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        );
+    }
+));
+
+const NavItem = React.memo(({ label, active, onClick, count, isCollapsed }: { label: string; active: boolean; onClick: () => void; count: number; isCollapsed: boolean }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <motion.button
+            onClick={onClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            whileHover={{ x: isCollapsed ? 0 : 6 }}
+            whileTap={{ scale: 0.98 }}
+            className={cn(
+                "group relative w-full text-left py-5 lg:py-6 px-6 lg:px-8 transition-all duration-300 outline-none",
+                active ? "bg-foreground/[0.03]" : "hover:bg-foreground/[0.015]",
+                isCollapsed && "px-0 flex justify-center py-8"
+            )}
+        >
+            <div className={cn("flex items-center justify-between relative z-10 w-full", isCollapsed && "justify-center")}>
+                <div className="flex items-center gap-3">
+                    <div className={cn(
+                        "w-2 h-2 rounded-full transition-all duration-300 relative",
+                        active
+                            ? "bg-foreground scale-125 shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                            : "bg-muted-foreground/30 group-hover:bg-muted-foreground/50"
+                    )} />
+
+                    {!isCollapsed && (
+                        <span className={cn(
+                            "text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight transition-all duration-300 whitespace-nowrap",
+                            active ? "text-foreground" : "text-muted-foreground/60 group-hover:text-muted-foreground/80 dark:text-muted-foreground/40 dark:group-hover:text-muted-foreground/60"
+                        )}>
+                            {label}
+                        </span>
+                    )}
+                </div>
+
+                {/* Hover Preview for Collapsed Sidebar */}
+                {isCollapsed && (
+                    <AnimatePresence>
+                        {isHovered && (
+                            <motion.div
+                                initial={{ opacity: 0, x: 10, scale: 0.95 }}
+                                animate={{ opacity: 1, x: 0, scale: 1 }}
+                                exit={{ opacity: 0, x: 5, scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                className="absolute left-[70%] ml-4 px-4 py-2 bg-foreground text-background text-[10px] font-black uppercase tracking-[0.2em] rounded-lg shadow-2xl z-[100] whitespace-nowrap pointer-events-none"
+                            >
+                                <div className="flex items-center gap-2">
+                                    {label}
+                                    <span className="opacity-40 text-[8px]">{count.toString().padStart(2, '0')}</span>
+                                </div>
+                                {/* Arrow Tip */}
+                                <div className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-foreground rotate-45" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                )}
+
+                {!isCollapsed && (
+                    <span className={cn(
+                        "text-xs font-bold tabular-nums transition-all duration-300",
+                        active ? "text-foreground/80" : "text-muted-foreground/15"
+                    )}>
+                        {count.toString().padStart(2, '0')}
+                    </span>
+                )}
+            </div>
+
+            <AnimatePresence>
+                {active && (
+                    <motion.div
+                        layoutId="navActiveBar"
+                        initial={{ opacity: 0, scaleY: 0 }}
+                        animate={{ opacity: 1, scaleY: 1 }}
+                        exit={{ opacity: 0, scaleY: 0 }}
+                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-foreground origin-center"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                )}
+            </AnimatePresence>
+        </motion.button>
+    );
+});
+
+function AchievementModal({
+    achievement,
+    onClose,
+    onNext,
+    onPrev,
+    currentIndex,
+    totalCount,
+    isLowPowerMode
+}: {
+    achievement: Achievement;
+    onClose: () => void;
+    onNext?: () => void;
+    onPrev?: () => void;
+    currentIndex: number;
+    totalCount?: number;
+    isLowPowerMode?: boolean
+}) {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
+
+    // Keyboard navigation only (Scroll-lock handled by parent)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowRight') onNext?.();
+            if (e.key === 'ArrowLeft') onPrev?.();
+            if (e.key === 'Escape') {
+                // Instantly disable pointer events on this modal container
+                const container = document.getElementById('achievement-modal-portal');
+                if (container) container.style.pointerEvents = 'none';
+                onClose();
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onNext, onPrev, onClose]);
+
+    if (!mounted) return null;
+
+    return createPortal(
+        <motion.div
+            id="achievement-modal-portal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, pointerEvents: 'none' }}
+            className={cn(
+                "fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden",
+                isLowPowerMode ? "bg-background/98" : "bg-background/40 backdrop-blur-2xl"
+            )}
+            onClick={() => {
+                const container = document.getElementById('achievement-modal-portal');
+                if (container) container.style.pointerEvents = 'none';
+                onClose();
+            }}
+        >
+            <motion.div
+                layoutId={`achievement-${achievement.id}`}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-5xl flex flex-col bg-card/90 dark:bg-card/70 backdrop-blur-3xl rounded-2xl overflow-hidden border border-border/50 shadow-2xl dark:shadow-[0_0_100px_rgba(0,0,0,0.5)]"
+            >
+                {/* --- TERMINAL HEADER --- */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-border/50 bg-foreground/5">
+                    {/* Traffic Lights */}
+                    <div className="flex items-center gap-2">
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                const container = document.getElementById('achievement-modal-portal');
+                                if (container) container.style.pointerEvents = 'none';
+                                onClose();
+                            }}
+                            className="w-3.5 h-3.5 rounded-full bg-[#FF5F56] hover:brightness-75 transition-all shadow-sm" 
+                            title="Close"
+                        />
+                        <div className="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] opacity-50 shadow-sm" />
+                        <div className="w-3.5 h-3.5 rounded-full bg-[#27C93F] opacity-50 shadow-sm" />
+                    </div>
+
+                    {/* Window Title / Path */}
+                    <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-lg bg-background/40 border border-border/20 shadow-inner">
+                        <MousePointer2 className="w-3 h-3 text-primary" />
+                        <span className="text-[10px] font-mono font-bold tracking-tight text-foreground/60">
+                            ~/achievements/<span className="text-foreground">{achievement.id.replace('achievement-', 'cert_')}</span>
+                        </span>
+                    </div>
+
+                    {/* Terminal Navigation */}
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-background/50 border border-border/30 text-[10px] font-mono font-black tracking-widest">
+                            <span className="text-foreground">{(currentIndex + 1).toString().padStart(2, '0')}</span>
+                            <span className="text-muted-foreground/30">/</span>
+                            <span className="text-muted-foreground/60">{(totalCount || 0).toString().padStart(2, '0')}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onPrev?.(); }}
+                                className="p-1 px-2 rounded-md hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition-all active:scale-90"
+                            >
+                                <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onNext?.(); }}
+                                className="p-1 px-2 rounded-md hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition-all active:scale-90"
+                            >
+                                <ChevronRight className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* --- TERMINAL BODY --- */}
+                <div className="flex flex-col lg:flex-row items-stretch p-6 md:p-8 lg:p-10 gap-10 overflow-auto no-scrollbar max-h-[85vh]">
+                    
+                    {/* Left: Certificate Image Section */}
+                    <div className="lg:w-[55%] flex flex-col gap-4">
+                        <motion.div 
+                            key={achievement.id + "-image"}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            className="w-full flex items-center justify-center p-2 rounded-xl bg-background/20 border border-border/10 shadow-inner relative group"
+                        >
+                            {achievement.image ? (
+                                achievement.image.endsWith('.pdf') ? (
+                                    <div className="w-full aspect-[1.4] relative rounded-lg overflow-hidden border border-border/20 shadow-xl bg-white">
+                                        <iframe
+                                            src={`${achievement.image}#toolbar=0&view=FitH`}
+                                            className="w-full h-full border-0"
+                                            title={achievement.title}
+                                        />
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={achievement.image}
+                                        alt={achievement.title}
+                                        className="w-full h-auto max-h-[55vh] object-contain rounded-lg shadow-xl border border-border/20"
+                                    />
+                                )
+                            ) : (
+                                <div className="w-48 h-48 flex items-center justify-center rounded-3xl bg-foreground/5 backdrop-blur-3xl border border-border/10 opacity-20">
+                                    <Award className="w-24 h-24 text-foreground" />
+                                </div>
+                            )}
+
+                            {/* Technical Overlay */}
+                            <div className="absolute bottom-6 left-6 px-3 py-1.5 rounded-md bg-black/50 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span className="text-[9px] font-mono text-white/70 uppercase tracking-widest">Type: {achievement.type || "Archive"}</span>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Right: Details Panel */}
+                    <div className="lg:w-[45%] flex flex-col justify-between py-2">
+                        <div className="space-y-8">
+                            <div className="space-y-4">
+                                <motion.h2 
+                                    key={achievement.id + "-title"}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="text-3xl lg:text-4xl font-black text-foreground leading-[1.05] tracking-tight"
+                                >
+                                    {achievement.title}
+                                </motion.h2>
+
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <div className="flex items-center gap-3 py-2 px-4 rounded-xl bg-foreground/5 border border-border/30 w-fit">
+                                        <Building2 className="w-4 h-4 text-muted-foreground" />
+                                        <span className="text-sm font-bold text-foreground/80 tracking-tight">{achievement.issuer}</span>
+                                    </div>
+
+                                    {achievement.credentialUrl && (
+                                        <a 
+                                            href={achievement.credentialUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group relative inline-flex items-center justify-center gap-2.5 px-4 py-2 bg-foreground text-background font-black rounded-xl text-[9px] uppercase tracking-[0.2em] transition-all hover:-translate-y-0.5 active:scale-95 shadow-lg overflow-hidden"
+                                        >
+                                            <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                                            <span>Verify Source</span>
+                                            <ExternalLink className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-2.5 font-mono">
+                                <div className="group flex flex-col gap-1 p-4 rounded-xl bg-foreground/[0.03] border border-border/50 hover:bg-foreground/[0.05] transition-all">
+                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-muted-foreground/40">$ date --issued</span>
+                                    <span className="text-[10px] font-bold text-foreground/90 uppercase tracking-wider">{formatDate(achievement.date)}</span>
+                                </div>
+                                <div className="group flex flex-col gap-1 p-4 rounded-xl bg-foreground/[0.03] border border-border/50 hover:bg-foreground/[0.05] transition-all">
+                                    <span className="text-[8px] font-black uppercase tracking-[0.2em] text-muted-foreground/40">$ credential --id</span>
+                                    <code className="text-[10px] font-bold text-primary">{achievement.credentialId || "VERIFIED_RECORD"}</code>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>,
+        document.body
+    );
+}
+
+export default function AchievementsPage() {
+    const t = useTranslations('achievements');
+    const { isLowPowerMode } = usePerformance();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+    const [activeCategory, setActiveCategory] = useState('all');
+    const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+
+    // Centralized Scroll Lock - Optimized to ONLY fire on Open/Close
+    useEffect(() => {
+        const body = document.body;
+        if (selectedAchievement) {
+            const isAlreadyLocked = body.getAttribute('data-modal-open') === 'true';
+            if (!isAlreadyLocked) {
+                const originalStyle = window.getComputedStyle(body).overflow;
+                const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+                
+                body.style.overflow = 'hidden';
+                body.style.paddingRight = `${scrollBarWidth}px`;
+                body.setAttribute('data-modal-open', 'true');
+                body.setAttribute('data-original-overflow', originalStyle);
+            }
+        } else {
+            const originalStyle = body.getAttribute('data-original-overflow') || '';
+            body.style.overflow = originalStyle === 'hidden' ? '' : originalStyle;
+            body.style.paddingRight = '0px';
+            body.removeAttribute('data-modal-open');
+            body.removeAttribute('data-original-overflow');
+        }
+    }, [!!selectedAchievement]); // Only fire when truthiness changes
+
+    const stats = useMemo(() => {
+        const total = portfolioData.achievements.length;
+        const awards = portfolioData.achievements.filter(a => a.category.toLowerCase() === 'award').length;
+        const certifications = portfolioData.achievements.filter(a => a.category.toLowerCase() === 'certification').length;
+        const competitions = portfolioData.achievements.filter(a => a.category.toLowerCase() === 'competition').length;
+        return { total, awards, certifications, competitions };
+    }, []);
+
+    const filteredAchievements = useMemo(() => {
+        let achievements = [...portfolioData.achievements];
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            achievements = achievements.filter((a) =>
+                a.title.toLowerCase().includes(query) ||
+                a.issuer.toLowerCase().includes(query) ||
+                a.category.toLowerCase().includes(query)
+            );
+        }
+        if (activeCategory !== 'all') {
+            achievements = achievements.filter(a => a.category.toLowerCase() === activeCategory.toLowerCase());
+        }
+        achievements.sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+        return achievements;
+    }, [searchQuery, sortOrder, activeCategory]);
+
+    // Navigation logic for modal (Stabilized with useCallback)
+    const currentIndex = useMemo(() => {
+        if (!selectedAchievement) return -1;
+        return filteredAchievements.findIndex(a => a.id === selectedAchievement.id);
+    }, [selectedAchievement, filteredAchievements]);
+
+    const handleNext = useCallback(() => {
+        if (!selectedAchievement) return;
+        const currentIndex = filteredAchievements.findIndex(a => a.id === selectedAchievement.id);
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex + 1) % filteredAchievements.length;
+        setSelectedAchievement(filteredAchievements[nextIndex]);
+    }, [selectedAchievement, filteredAchievements]);
+
+    const handlePrev = useCallback(() => {
+        if (!selectedAchievement) return;
+        const currentIndex = filteredAchievements.findIndex(a => a.id === selectedAchievement.id);
+        if (currentIndex === -1) return;
+        const prevIndex = (currentIndex - 1 + filteredAchievements.length) % filteredAchievements.length;
+        setSelectedAchievement(filteredAchievements[prevIndex]);
+    }, [selectedAchievement, filteredAchievements]);
+
+    const handleCloseModal = useCallback(() => {
+        setSelectedAchievement(null);
+    }, []);
+
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+    const getCategoryCount = (cat: string) => {
+        if (cat === 'all') return portfolioData.achievements.length;
+        return portfolioData.achievements.filter(a => a.category.toLowerCase() === cat.toLowerCase()).length;
+    };
+
+    return (
+
+        <div className="min-h-screen bg-background text-foreground overflow-y-auto overflow-x-hidden">
+            {/* Hero Scroll Section */}
+            {/* Hero Scroll Section */}
+            <ErrorBoundary fallback={<div className="h-[60vh] flex items-center justify-center">Hero Unavailable</div>}>
+                <CertificateHeroScroll isLowPowerMode={isLowPowerMode} />
+            </ErrorBoundary>
+
+            {/* Background */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+                <motion.div
+                    className={cn(
+                        "absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-foreground/[0.02]",
+                        isLowPowerMode ? "blur-xl" : "blur-3xl"
+                    )}
+                    animate={isLowPowerMode ? {} : { scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                    style={{ willChange: "transform, opacity" }}
+                />
+                <motion.div
+                    className={cn(
+                        "absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-foreground/[0.015]",
+                        isLowPowerMode ? "blur-xl" : "blur-3xl"
+                    )}
+                    animate={isLowPowerMode ? {} : { scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+                    transition={{ duration: 6, repeat: Infinity, delay: 1 }}
+                    style={{ willChange: "transform, opacity" }}
+                />
+            </div>
+
+            {/* CONTINUOUS CURTAIN LAYER: Covers the fixed hero */}
+            <div className="relative z-50 bg-background shadow-[0_-20px_40px_rgba(0,0,0,0.2)]">
+
+                {/* Main Two-Panel Layout */}
+                <div className="flex flex-col lg:flex-row relative items-start">
+
+                    {/* LEFT PANEL: Navigation - Sticky */}
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            width: isSidebarCollapsed ? "80px" : "33.333333%",
+                        }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className={cn(
+                            "w-full h-auto lg:sticky lg:top-0 py-12 lg:py-36 flex flex-col z-40 bg-background/95 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none border-r border-border/10",
+                            isSidebarCollapsed && "items-center"
+                        )}
+                    >
+
+                        {/* Header & Toggle */}
+                        <div className={cn("px-6 lg:px-10 mb-10 w-full flex items-center justify-between", isSidebarCollapsed && "px-0 justify-center")}>
+                            {!isSidebarCollapsed && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                >
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-2 h-2 rounded-full bg-foreground" />
+                                        <h1 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                                            The Archive
+                                        </h1>
+                                    </div>
+                                    <div className="h-1.5 w-20 bg-foreground opacity-100" />
+                                </motion.div>
+                            )}
+
+                            <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+                                className={cn(
+                                    "p-2.5 rounded-xl bg-foreground/10 hover:bg-foreground/20 text-foreground transition-all border border-foreground/10",
+                                    isSidebarCollapsed && "mt-[-60px]"
+                                )}
+                            >
+                                {isSidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
+                            </motion.button>
+                        </div>
+
+                        {/* Navigation */}
+                        <motion.nav
+                            className="flex-1 w-full"
+                            variants={staggerContainer}
+                            initial="hidden"
+                            animate="show"
+                        >
+                            <motion.div variants={staggerItem}>
+                                <NavItem label="All Entries" active={activeCategory === 'all'} onClick={() => setActiveCategory('all')} count={getCategoryCount('all')} isCollapsed={isSidebarCollapsed} />
+                            </motion.div>
+                            <motion.div variants={staggerItem}>
+                                <NavItem label="Certifications" active={activeCategory === 'certification'} onClick={() => setActiveCategory('certification')} count={getCategoryCount('certification')} isCollapsed={isSidebarCollapsed} />
+                            </motion.div>
+                            <motion.div variants={staggerItem}>
+                                <NavItem label="Awards" active={activeCategory === 'award'} onClick={() => setActiveCategory('award')} count={getCategoryCount('award')} isCollapsed={isSidebarCollapsed} />
+                            </motion.div>
+                            <motion.div variants={staggerItem}>
+                                <NavItem label="Competitions" active={activeCategory === 'competition'} onClick={() => setActiveCategory('competition')} count={getCategoryCount('competition')} isCollapsed={isSidebarCollapsed} />
+                            </motion.div>
+                        </motion.nav>
+
+                        {/* Large counter */}
+                        {!isSidebarCollapsed && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6 }}
+                                className="p-6 lg:p-10 hidden lg:block"
+                            >
+                                <motion.div
+                                    className="text-[9rem] font-black leading-none text-foreground/[0.18] dark:text-foreground/20 select-none"
+                                >
+                                    {stats.total.toString().padStart(2, '0')}
+                                </motion.div>
+                                <div className="text-[10px] font-bold text-muted-foreground/50 uppercase tracking-widest flex items-center gap-2 -mt-4">
+                                    <Award className="w-3 h-3" />
+                                    Achievements
+                                </div>
+                            </motion.div>
+                        )}
+                    </motion.div>
+
+                    {/* RIGHT PANEL: Cards - Natural Flow */}
+                    <div className="flex-1 w-full flex flex-col pt-8 lg:pt-36 px-6 lg:px-10 pb-20 overflow-hidden">
+
+                        {/* Controls */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between mb-8 shrink-0 z-30 sticky top-20 lg:static"
+                        >
+                            {/* Stats */}
+                            <div className="flex gap-2 flex-wrap">
+                                {[
+                                    { icon: Trophy, value: stats.total },
+                                    { icon: Medal, value: stats.awards },
+                                    { icon: Award, value: stats.certifications }
+                                ].map((stat, i) => (
+                                    <motion.div
+                                        key={i}
+                                        whileHover={{ scale: 1.05 }}
+                                        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/40 bg-secondary/20 text-xs font-bold"
+                                    >
+                                        <stat.icon className="w-3 h-3 text-muted-foreground" />
+                                        <span>{stat.value}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* Search */}
+                            <div className="flex items-center gap-2 w-full sm:w-auto">
+                                <div className="relative flex-1 sm:min-w-[200px] group">
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+                                    <input
+                                        type="text"
+                                        placeholder="Search..."
+                                        value={searchQuery}
+                                        onChange={e => setSearchQuery(e.target.value)}
+                                        className="w-full bg-white dark:bg-secondary/20 border-2 border-zinc-300 dark:border-border/40 focus:border-foreground/30 rounded-xl pl-10 pr-8 py-2.5 text-sm outline-none transition-all placeholder:text-muted-foreground/40 shadow-sm focus:shadow-md"
+                                    />
+                                    {searchQuery && (
+                                        <motion.button
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            onClick={() => setSearchQuery('')}
+                                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                        >
+                                            <X className="w-3.5 h-3.5" />
+                                        </motion.button>
+                                    )}
+                                </div>
+                                <motion.button
+                                    onClick={() => setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest')}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="p-2.5 rounded-xl bg-white dark:bg-secondary/20 hover:bg-secondary/10 dark:hover:bg-secondary/40 border-2 border-zinc-300 dark:border-border/40 text-muted-foreground hover:text-foreground transition-all shadow-sm group-hover:shadow-md"
+                                >
+                                    {sortOrder === 'newest' ? <SortDesc className="w-4 h-4" /> : <SortAsc className="w-4 h-4" />}
+                                </motion.button>
+                            </div>
+                        </motion.div>
+
+                        <LayoutGroup id="achievements-gallery">
+                            <motion.div
+                                layout
+                                className={cn(
+                                    "grid gap-5 transition-all duration-500",
+                                    isSidebarCollapsed
+                                        ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-4"
+                                        : "grid-cols-1 md:grid-cols-2"
+                                )}
+                            >
+                                <AnimatePresence mode="popLayout">
+                                    {filteredAchievements.length > 0 ? (
+                                        filteredAchievements.map((achievement, index) => (
+                                            <AchievementCard
+                                                key={achievement.id}
+                                                achievement={achievement}
+                                                onClick={() => setSelectedAchievement(achievement)}
+                                                index={index}
+                                                isLowPowerMode={isLowPowerMode}
+                                            />
+                                        ))
+                                    ) : (
+                                        <motion.div 
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            className="col-span-full py-20 flex flex-col items-center justify-center text-center space-y-4 rounded-3xl border-2 border-dashed border-border/20 bg-foreground/5 backdrop-blur-3xl"
+                                        >
+                                            <div className="p-5 rounded-full bg-foreground/5">
+                                                <Search className="w-10 h-10 text-muted-foreground/30" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <h3 className="text-xl font-black text-foreground/80 tracking-tight">No Archive Entries Found</h3>
+                                                <p className="text-sm font-mono text-muted-foreground/40 uppercase tracking-widest">[ ERROR 404: RESOURCE_NOT_FOUND ]</p>
+                                            </div>
+                                            <button 
+                                                onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
+                                                className="px-6 py-2.5 rounded-xl bg-foreground text-background font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all active:scale-95"
+                                            >
+                                                $ reset --query
+                                            </button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+                        </LayoutGroup>
+
+                        {filteredAchievements.length === 0 && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="flex flex-col items-center justify-center py-20 text-center"
+                            >
+                                <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+                                    <Award className="w-16 h-16 text-muted-foreground/20 mb-4" />
+                                </motion.div>
+                                <p className="text-sm font-medium text-muted-foreground/50">No achievements found</p>
+                            </motion.div>
+                        )}
+                    </div>
+                </div>
+
+                {/* FALLING TEXT SECTION - Below contents */}
+                <motion.section
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="w-full py-24 border-t border-border/20"
+                >
+                    <div className="max-w-5xl mx-auto px-6">
+                        {/* Section header */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-center mb-12"
+                        >
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black mb-3">
+                                Technical Universe
+                            </h2>
+                            <p className="text-sm text-muted-foreground/60 max-w-lg mx-auto leading-relaxed">
+                                Interact with the core technologies and values that drive my research and development journey.
+                            </p>
+                        </motion.div>
+
+                        {/* Falling text container */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            className="relative w-full mx-auto h-[400px]"
+                        >
+                            <ErrorBoundary fallback={<div className="text-center opacity-50">Visuals Unavailable</div>}>
+                                <FallingText
+                                    text="CSharp Java JavaScript Python Dart DotNet Blazor React Flutter Flask SQLServer PostgreSQL MySQL SQLite Docker VSCode AzureDevOps API REST"
+                                    highlightWords={['CSharp', 'DotNet', 'SQLServer', 'React', 'PostgreSQL']}
+                                    trigger="scroll"
+                                    gravity={0.8}
+                                    mouseConstraintStiffness={0.2}
+                                    fontSize="1.5rem"
+                                    fontWeight="900"
+                                    force={true}
+                                />
+                            </ErrorBoundary>
+                        </motion.div>
+                    </div>
+                </motion.section>
+            </div>
+
+            {/* Modal */}
+            <AnimatePresence>
+                {selectedAchievement && (
+                    <AchievementModal
+                        achievement={selectedAchievement}
+                        onClose={handleCloseModal}
+                        onNext={handleNext}
+                        onPrev={handlePrev}
+                        currentIndex={currentIndex}
+                        totalCount={filteredAchievements.length}
+                        isLowPowerMode={isLowPowerMode}
+                    />
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}

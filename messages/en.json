@@ -1,0 +1,493 @@
+{
+    "navigation": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "experience": "Experience",
+        "skills": "Skills",
+        "achievements": "Achievements",
+        "blog": "Blog",
+        "gallery": "Gallery",
+        "contact": "Contact",
+        "resume": "Resume",
+        "tools": "Tools",
+        "menu": {
+            "achievements": "Achievements",
+            "achievementsDesc": "Certifications, awards, and milestones",
+            "skills": "Skills",
+            "skillsDesc": "Technologies and tools I work with",
+            "experience": "Experience",
+            "experienceDesc": "My professional journey and growth",
+            "projects": "Projects",
+            "projectsDesc": "A showcase of all my work",
+            "blog": "Blog",
+            "blogDesc": "Thoughts and technical explorations",
+            "gallery": "Gallery",
+            "galleryDesc": "Visual archive of media and projects"
+        },
+        "shortcuts": {
+            "volume1": "Volume I: Identity",
+            "volume2": "Volume II: Professional Sequence",
+            "volume3": "Volume III: Competency Matrix",
+            "volume4": "Volume IV: Creative Output",
+            "preview": "Preview Mode",
+            "idRef": "ID_REF"
+        }
+    },
+    "hero": {
+        "greeting": "Welcome to my digital space",
+        "subtitle": "Full Stack Developer • .NET Core • Web Engineer",
+        "cta": {
+            "primary": "Explore Projects",
+            "secondary": "Get in Touch",
+            "exploreMore": "Explore More"
+        },
+        "badge": "Available for opportunities",
+        "scroll": "Scroll Down",
+        "role": "Software Engineer",
+        "description": "Building scalable systems at the intersection of <span class='text-primary font-semibold'>.NET</span>, <span class='text-secondary font-semibold'>Engineering</span>, and <span class='text-accent font-semibold'>Clean Architecture</span>."
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "Full Stack Developer & Problem Solver",
+        "description": "A passionate developer specializing in Full Stack Development and .NET ecosystem. Currently building scalable backend APIs and microservices architectures.",
+        "stats": {
+            "experience": "Years Learning",
+            "projects": "Projects Done",
+            "certifications": "Certifications",
+            "competitions": "Competitions"
+        },
+        "identity": "Identity Link Established",
+        "architecting": "Architecting",
+        "digitalReality": "Digital Reality",
+        "leadIn": {
+            "label": "WHAT I DO",
+            "applied": "Scalable",
+            "intelligence": "architecture..",
+            "production": "production",
+            "engineering": "code should be built to last",
+            "thesis": "I build robust backend systems and high-performance APIs that power applications at scale.",
+            "scope": "Focused on microservices, database management, and enterprise-grade applications designed for performance, reliability, and scalability.",
+            "bridging": "Bridging complex systems with seamless user experiences.",
+            "integration": "Beyond writing code, I architect full-stack ecosystems—secure backends, resilient data architectures, and scalable deployment pipelines.",
+            "signature": "Charan",
+            "role": ".NET & Full Stack Developer",
+            "aboutMe": "About Me",
+            "scroll": "Scroll to Explore",
+            "shortStory": "My Short Story"
+        },
+        "coreEngineering": {
+            "label": "Core Engineering",
+            "title": "Proven <span class='text-primary italic font-serif font-light lowercase'>stack.</span> <br /> Measurable <span class='italic font-serif font-light text-foreground'>results.</span>",
+            "p1": "I develop robust backend systems using .NET Core, C#, and REST APIs, structuring workflows and exposing services for seamless integration.",
+            "p2": "Integrated into full-stack apps with Next.js, React, and SQL Server, backed by Entity Framework.",
+            "p3": "All projects use disciplined version control, Docker containerization, and are built for stable production deployment.",
+            "gpa": "Academic GPA",
+            "projects": "Projects Built",
+            "years": "Years Exp."
+        },
+        "emergingResearch": {
+            "label": "Exploration Phase",
+            "title": "EMERGING <span class='italic font-serif font-light text-primary lowercase'>&</span> MODERN STACKS",
+            "agentic": {
+                "title": "MICROSERVICES",
+                "desc": "Exploring scalable microservices architecture, event-driven systems, and modern API gateways to extend my backend foundation."
+            },
+            "web3": {
+                "title": "FRONTEND TECHNOLOGIES",
+                "desc": "Building modern interfaces with React, Next.js, and TailwindCSS. Creating seamless user experiences connected to powerful .NET backends."
+            }
+        },
+        "profile": {
+            "title": "Architecting Scalable Systems <br /> Where Logic Meets Engineering.",
+            "narrativeLabel": "Core Narrative",
+            "narrative": "As a passionate Full Stack Developer specializing in .NET Core and Web Technologies, I focus on building systems that bridge complex business logic with production-ready implementation.",
+            "narrative2": "My work combines algorithmic thinking, backend engineering, and clean architecture to deliver solutions that are robust, reliable, and built for real-world impact.",
+            "pillars": {
+                "reliable": {
+                    "title": "Robust by Design",
+                    "desc": "Engineered for reliability under scale and operational pressure."
+                },
+                "optimized": {
+                    "title": "Production-Ready",
+                    "desc": "From prototype to deployment with engineering discipline."
+                },
+                "maintainable": {
+                    "title": "Architected for Evolution",
+                    "desc": "Designed to grow, adapt, and sustain long-term system development."
+                },
+                "evolvable": {
+                    "title": "Data-Driven Intelligence",
+                    "desc": "Decisions powered by models, metrics, and measurable performance."
+                }
+            }
+        },
+        "closing": {
+            "experience": {
+                "label": "BACKGROUND",
+                "title1": "KEY",
+                "title2": "EXPERIENCE",
+                "viewMore": "Full Experience"
+            },
+            "projects": {
+                "label": "PORTFOLIO",
+                "title1": "FLAGSHIP",
+                "title2": "PROJECTS",
+                "viewMore": "All Projects"
+            },
+            "experiencesList": [
+                {
+                    "company": "AGREMATE Private Limited",
+                    "role": ".NET DEVELOPER",
+                    "desc": "Building scalable backend APIs and automated workflows for India's smart property management platform."
+                },
+                {
+                    "company": "NTSIPL",
+                    "role": ".NET DEVELOPER",
+                    "desc": "Development on RTGS/NEFT banking project for major Banks and Vendors using Microservices Architecture."
+                }
+            ],
+            "projectsList": [
+                {
+                    "title": "DevLens - AI GitHub Analyzer",
+                    "desc": "AI-Powered GitHub Repository Analyzer using Gemini API, C#, ASP.NET Core, and React."
+                },
+                {
+                    "title": "Money Mate",
+                    "desc": "Personal Finance Management Web App built with Python, Flask, SQLite, and Chart.js."
+                },
+                {
+                    "title": "Orion",
+                    "desc": "AI-Powered Personal Voice Assistant using Python, Flask, and Google TTS."
+                }
+            ],
+            "discoverMore": "Discover More"
+        }
+    },
+    "projects": {
+        "title": "Projects",
+        "subtitle": "A showcase of my creative and technical work",
+        "search": "Search projects...",
+        "viewAll": "View All Projects",
+        "viewProject": "View Project",
+        "liveDemo": "Live Demo",
+        "sourceCode": "Source Code",
+        "techStack": "Tech Stack",
+        "tools": "Tools Used",
+        "highlights": "Highlights",
+        "challenges": "Challenges",
+        "filters": {
+            "all": "All",
+            "ongoing": "Ongoing",
+            "completed": "Completed"
+        },
+        "sections": {
+            "missionBrief": "Mission Brief",
+            "keyFeatures": "Key Features",
+            "engineeringChronicles": "Engineering Chronicles",
+            "visualGallery": "Visual Gallery",
+            "installation": "Installation Instructions",
+            "projectAccess": "Project Access",
+            "technologies": "Technologies",
+            "contents": "Table of Contents",
+            "moreProjects": "More Projects",
+            "backToProjects": "Back to Projects",
+            "viewMore": "View More",
+            "viewLess": "Show Less",
+            "solution": "Solution",
+            "liveDemo": "Live Demo",
+            "sourceCode": "Source Code"
+        },
+        "status": {
+            "ongoing": "Active Development",
+            "completed": "Completed Project"
+        },
+        "metadata": {
+            "role": "Role",
+            "timeline": "Timeline",
+            "team": "Team",
+            "techStack": "Tech Stack",
+            "roleValue": "Full Stack Dev",
+            "teamValue": "Individual",
+            "techStackValue": "{count} Technologies"
+        }
+    },
+    "experience": {
+        "title": "Experience",
+        "subtitle": "My professional journey and growth",
+        "showDetail": "Show Detail",
+        "hideDetail": "Hide Detail",
+        "tasks": "TASKS",
+        "learned": "WHAT I LEARNED",
+        "impact": "IMPACT",
+        "present": "Present",
+        "responsibilities": "Responsibilities",
+        "skills": "Skills Used",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "type": {
+            "full-time": "Full-time",
+            "part-time": "Part-time",
+            "internship": "Internship",
+            "freelance": "Freelance",
+            "contract": "Contract",
+            "apprenticeship": "Apprenticeship",
+            "volunteer": "Volunteer"
+        },
+        "filters": {
+            "all": "All",
+            "latest": "Latest",
+            "oldest": "Oldest",
+            "ongoing": "Ongoing"
+        },
+        "education": {
+            "title": "Education"
+        }
+    },
+    "expertise": {
+        "title": "Core Capabilities",
+        "subtitle": "Specialized in cutting-edge technologies that power modern digital experiences",
+        "dragHint": "Drag or scroll to explore"
+    },
+    "skills": {
+        "title": "Skills & Tools",
+        "subtitle": "Technologies and tools I work with",
+        "hard": "Hard Skills",
+        "soft": "Soft Skills",
+        "technical": "Technical Proficiency",
+        "tools": "Tools & Software",
+        "pillars": "Core Pillars",
+        "achievements": "Verified Achievements",
+        "level": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert"
+        }
+    },
+    "achievements": {
+        "title": "Achievements",
+        "subtitle": "Certifications, awards, and milestones",
+        "search": "Search achievements...",
+        "viewCredential": "View Credential",
+        "category": {
+            "all": "All",
+            "certification": "Certification",
+            "award": "Award",
+            "publication": "Publication",
+            "competition": "Competition"
+        },
+        "sort": {
+            "newest": "Newest",
+            "oldest": "Oldest"
+        },
+        "stats": {
+            "total": "Total Achievements",
+            "awards": "Awards Won",
+            "certifications": "Certifications"
+        }
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Let's build something amazing together",
+        "form": {
+            "name": "Your Name",
+            "email": "Your Email",
+            "subject": "Subject",
+            "message": "Your Message",
+            "messagePlaceholder": "Tell me about your project...",
+            "send": "Send Message",
+            "submit": "SEND MESSAGE",
+            "sending": "SENDING...",
+            "sent": "SENT!",
+            "success": "Message sent successfully!",
+            "error": "Something went wrong. Please try again."
+        },
+        "social": {
+            "title": "Connect on Social Media"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions"
+        },
+        "info": {
+            "email": "Email",
+            "phone": "Phone",
+            "location": "Location",
+            "availability": "Open for opportunities"
+        },
+        "hero": {
+            "title": "LET'S TALK",
+            "subtitle": "Have an idea? Let's build something extraordinary together.",
+            "ticker": {
+                "build": "Let's Build Something Amazing · ",
+                "freelance": "Available for Freelance · "
+            }
+        },
+        "faqData": [
+            {
+                "q": "What is your main area of expertise?",
+                "a": "As a passionate developer, I specialize in Full-stack Development focusing on .NET Core, React, Next.js, and scalable database management."
+            },
+            {
+                "q": "Are you available for freelance collaborations?",
+                "a": "Absolutely. I am currently open to innovative freelance projects or technical collaborations that bridge innovation with strategic execution."
+            },
+            {
+                "q": "What is your typical tech stack for production?",
+                "a": "For backend projects, I primarily use C#, .NET Core, and SQL Server. For web applications, my go-to is the React ecosystem: Next.js, TypeScript, and Tailwind CSS."
+            },
+            {
+                "q": "Do you have experience with enterprise projects?",
+                "a": "Yes, I've served as a Software Developer in environments like AGREMATE and NTSIPL, architecting critical RTGS/NEFT payment processing systems and API infrastructure."
+            },
+            {
+                "q": "How can we start a partnership or project?",
+                "a": "The most efficient way is to use the contact form above or reach out directly via email at charansuvarna99@gmail.com. I'm usually able to respond quickly to discuss your needs."
+            }
+        ]
+    },
+    "footer": {
+        "copyright": "All rights reserved.",
+        "madeWith": "Made with",
+        "more": "More",
+        "marquee": [
+            "Open to Opportunities",
+            "Frontend Development",
+            "Backend Architecture",
+            "UI/UX Design",
+            "Creative Coding",
+            "System Optimization"
+        ],
+        "cta": {
+            "title": "Let's Work",
+            "titleHighlight": "Together",
+            "subtitle": "Have a project in mind? Let's build something extraordinary that solves real problems."
+        },
+        "links": "LINKS",
+        "socials": "SOCIALS",
+        "localTime": "LOCAL TIME",
+        "version": "VERSION",
+        "versionEdition": "2026 © Edition"
+    },
+    "ctaSection": {
+        "title": "Let's Build Something",
+        "together": "Together",
+        "subtitle": "Open to strategic collaborations in backend architecture and scalable full stack engineering. Let’s transform ambitious ideas into production ready solutions.",
+        "start": "Hire Me",
+        "work": "View My Projects",
+        "words": {
+            "amazing": "Amazing",
+            "innovative": "Innovative",
+            "scalable": "Scalable",
+            "creative": "Creative"
+        },
+        "ribbon1": ".NET Core • C# • React • SQL Server • Next.js • Tailwind CSS •",
+        "ribbon2": "Full Stack Developer • Backend Architecture • API Design • System Engineering •"
+    },
+    "stats": {
+        "systemStatus": "System Status: Analytics Active",
+        "portfolio": "Engineering Metrics",
+        "totalPulse": "Total Pulse",
+        "peakActivity": "Peak Activity",
+        "dailyAverage": "Daily Average",
+        "currentSprint": "Current Sprint",
+        "engageFlow": "Engage Flow",
+        "weeklyEffort": "Weekly Coding Effort",
+        "processSpeed": "Process Speed",
+        "avgPerf": "Average Performance",
+        "latency": "LATENCY: 14MS",
+        "system": "SYSTEM: DARWIN_X64_STABLE",
+        "scanning": "SCANNING_LIVE_RESOURCES",
+        "engineering": "ENGINEERING",
+        "metrics": "METRICS",
+        "analyticsSub": "ANALYTICS / INFRASTRUCTURE / PERFORMANCE DATA",
+        "statusOnline": "STATUS: ONLINE",
+        "loadStable": "SYSTEM_LOAD: STABLE"
+    },
+    "projectHeader": {
+        "title": "Architecting Digital Solutions",
+        "subtitle": "A curated showcase of technical innovation and backend engineering. Exploring the frontiers of <span class='font-bold text-white'>.NET Core</span>, Microservices, and scalable APIs."
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "notFound": "Page not found",
+        "backHome": "Back to Home",
+        "viewMore": "View More",
+        "readMore": "Read More",
+        "close": "Close",
+        "download": "Download",
+        "share": "Share",
+        "scrollAudit": "Scroll to explore"
+    },
+    "technical": {
+        "github": {
+            "title": "GitHub Contributions",
+            "description": "My GitHub activity over the last year.",
+            "total": "Total",
+            "thisWeek": "This Week",
+            "best": "Best",
+            "average": "Average",
+            "less": "Less",
+            "more": "More"
+        },
+        "wakatime": {
+            "title": "WakaTime Stats",
+            "description": "Coding activity over the last 7 days.",
+            "lastUpdate": "Last Updated",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "dailyAverage": "Daily Average",
+            "totalWeek": "Total This Week",
+            "bestDay": "Best Day",
+            "totalSince": "Total Since Joined",
+            "topLanguages": "Top Languages"
+        }
+    },
+    "blog": {
+        "title": "Thoughts & Explorations",
+        "subtitle": "Bridging the gap between technical complexity and practical implementation. A collection of insights on AI, Web3, and Software Engineering.",
+        "sectionBadge": "The Digital Archive",
+        "search": "Search articles...",
+        "readTime": "min read",
+        "readMore": "Read Post",
+        "back": "Back to Blog",
+        "noResults": "No articles found",
+        "categories": {
+            "applied-ai": "Applied AI",
+            "software-development": "Software Dev",
+            "about-me": "About Me",
+            "more": "More"
+        }
+    },
+    "gallery": {
+        "title": "Visual Archive",
+        "subtitle": "A curated collection of project highlights, technical documentation, and creative visual explorations.",
+        "filter": {
+            "all": "All Media",
+            "image": "Photos",
+            "video": "Videos"
+        },
+        "viewMedia": "View Media"
+    },
+    "chatbot": {
+        "title": "AI Assistant",
+        "subtitle": "Ask me about Charan",
+        "placeholder": "Type a message...",
+        "greeting": "Hi! I'm an AI assistant for **{name}**. 👋\n\nI can answer questions about:\n- Skills & technical expertise\n- Projects and work\n- Experience\n- Education\n- And more!\n\nAnything you'd like to ask?",
+        "suggestions": [
+            "What are your main skills?",
+            "Tell me about your best project",
+            "What is your work experience?",
+            "What .NET skills do you have?"
+        ],
+        "error": "An error occurred. Please try again.",
+        "invalidResponse": "Invalid response from server.",
+        "unknownError": "An unknown error occurred.",
+        "retry": "Try again",
+        "inputHint": "Enter to send, Shift+Enter for newline",
+        "close": "Close chat"
+    }
+}

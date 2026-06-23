@@ -1,0 +1,127 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { FaReact } from "react-icons/fa";
+import { portfolioData } from "@/data/portfolio";
+const iconConfigs = portfolioData.techStack.map((tech) => ({
+  Icon: null as React.ElementType | null,
+  img: tech.icon,
+}));
+
+export default function FeatureSection() {
+  const orbitCount = 3;
+  const orbitGap = 9; // rem between orbits
+  const iconsPerOrbit = Math.ceil(iconConfigs.length / orbitCount);
+
+  return (
+    <section className="relative w-full max-w-[1500px] mx-auto px-4 sm:px-6 my-16 md:my-32 z-10">
+      <div className="flex flex-col md:flex-row items-center justify-between min-h-[auto] md:min-h-[35rem] border border-gray-200 dark:border-white/10 bg-white dark:bg-black overflow-hidden rounded-[2.5rem] shadow-sm relative">
+        {/* Left side: Heading and Text */}
+        <div className="w-full md:w-[55%] z-10 p-6 sm:p-8 md:p-14 lg:p-20">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-gray-900 dark:text-white tracking-tight leading-[1.1]">
+            Engineering <br className="hidden md:block" /> the Future
+          </h1>
+          <p className="text-gray-500 dark:text-gray-400 mb-10 max-w-xl text-base md:text-lg leading-relaxed">
+            {portfolioData.personal.subtitle}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 md:gap-4">
+            <Button variant="default" asChild className="rounded-full px-6 md:px-8 py-5 md:py-6 font-semibold text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/90 transition-all w-full sm:w-auto text-center justify-center">
+              <Link href="/projects">View Projects</Link>
+            </Button>
+            <Button variant="outline" asChild className="rounded-full px-6 md:px-8 py-5 md:py-6 font-semibold text-sm md:text-base dark:border-white/20 dark:hover:bg-white/10 text-foreground transition-all w-full sm:w-auto text-center justify-center">
+              <Link href="/resume">My Resume</Link>
+            </Button>
+          </div>
+        </div>
+
+        {/* Right side: Orbit animation cropped to 1/2 */}
+        <div className="relative w-full md:w-[45%] h-[25rem] sm:h-[30rem] md:h-full md:min-h-[35rem] flex items-center justify-center md:justify-end overflow-hidden pointer-events-none mt-4 md:mt-0">
+          {/* Positioning the center of orbits exactly on the right edge on desktop, centered bottom on mobile */}
+          <div className="absolute left-1/2 md:left-auto md:right-0 top-1/2 md:top-1/2 -translate-x-1/2 md:translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] md:w-[60rem] md:h-[60rem] flex items-center justify-center">
+            
+            {/* Center Circle */}
+            <div className="w-16 h-16 md:w-28 md:h-28 rounded-full bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-white/10 shadow-lg flex items-center justify-center z-10 relative">
+              <div className="center-spin">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core" className="w-8 h-8 md:w-14 md:h-14" />
+              </div>
+            </div>
+
+            {/* Generate Orbits */}
+            {[...Array(orbitCount)].map((_, orbitIdx) => {
+              const size = `${18 + orbitGap * (orbitIdx + 1)}rem`; // Calculate diameter
+              const angleStep = (2 * Math.PI) / iconsPerOrbit;
+
+              return (
+                <div
+                  key={orbitIdx}
+                  className={`absolute rounded-full border border-dashed border-gray-300 dark:border-white/20 orbit-${orbitIdx}`}
+                  style={{
+                    width: size,
+                    height: size,
+                  }}
+                >
+                  {iconConfigs
+                    .slice(orbitIdx * iconsPerOrbit, orbitIdx * iconsPerOrbit + iconsPerOrbit)
+                    .map((cfg, iconIdx) => {
+                      const angle = iconIdx * angleStep;
+                      const x = 50 + 50 * Math.cos(angle);
+                      const y = 50 + 50 * Math.sin(angle);
+
+                      return (
+                        <div
+                          key={iconIdx}
+                          className="absolute -translate-x-1/2 -translate-y-1/2"
+                          style={{
+                            left: `${x}%`,
+                            top: `${y}%`,
+                          }}
+                        >
+                          <div 
+                            className={`bg-white dark:bg-gray-900 rounded-full p-2.5 md:p-3 shadow-md flex items-center justify-center border border-gray-100 dark:border-white/10 orbit-icon-${orbitIdx}`}
+                          >
+                            <img
+                              src={cfg.img}
+                              alt="icon"
+                              className="w-5 h-5 md:w-7 md:h-7 object-cover rounded-full"
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @keyframes stack-orbit-spin {
+          from { transform: rotate(0deg) translateZ(0); }
+          to { transform: rotate(360deg) translateZ(0); }
+        }
+        @keyframes stack-orbit-spin-reverse {
+          from { transform: rotate(360deg) translateZ(0); }
+          to { transform: rotate(0deg) translateZ(0); }
+        }
+
+        .center-spin {
+          animation: stack-orbit-spin 15s linear infinite !important;
+          will-change: transform;
+        }
+
+        .orbit-0 { animation: stack-orbit-spin 30s linear infinite !important; will-change: transform; }
+        .orbit-icon-0 { animation: stack-orbit-spin-reverse 30s linear infinite !important; will-change: transform; }
+
+        .orbit-1 { animation: stack-orbit-spin 45s linear infinite !important; will-change: transform; }
+        .orbit-icon-1 { animation: stack-orbit-spin-reverse 45s linear infinite !important; will-change: transform; }
+
+        .orbit-2 { animation: stack-orbit-spin 60s linear infinite !important; will-change: transform; }
+        .orbit-icon-2 { animation: stack-orbit-spin-reverse 60s linear infinite !important; will-change: transform; }
+        `
+      }} />
+    </section>
+  );
+}
