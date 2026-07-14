@@ -1,0 +1,331 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-bottom: 1.25rem;
+  transition: colors 0.5s;
+}
+
+.sectionDark {
+  composes: section;
+  background-color: #000;
+  color: #fff;
+}
+
+.sectionLight {
+  composes: section;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.oceanContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.oceanMobileFallback {
+  position: absolute;
+  inset: 0;
+  transition: opacity 1s;
+}
+
+.fallbackDark {
+  composes: oceanMobileFallback;
+  background-color: #000;
+}
+
+.fallbackLight {
+  composes: oceanMobileFallback;
+  background-color: #fff;
+}
+
+.oceanFallbackGlow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+.gradientBridge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12rem;
+  background-image: linear-gradient(to bottom, var(--gradient-from), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gradientBridgeDark {
+  composes: gradientBridge;
+  --gradient-from: #000;
+}
+
+.gradientBridgeLight {
+  composes: gradientBridge;
+  --gradient-from: hsl(var(--background));
+}
+
+.contentInner {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 80rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-size: 3.75rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 6rem;
+  }
+}
+
+.titleDarkText {
+  composes: title;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.6));
+}
+
+.titleLightText {
+  composes: title;
+  color: hsl(var(--foreground));
+}
+
+.desc {
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1.625;
+  max-width: 42rem;
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.1));
+  padding-bottom: 0.5rem;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 1.5rem;
+  }
+}
+
+.descDarkText {
+  composes: desc;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.descLightText {
+  composes: desc;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+}
+
+.actionArea {
+  width: 100%;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.newsletterWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.375rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.newsletterWrapperDark {
+  composes: newsletterWrapper;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.newsletterWrapperDark:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+}
+
+.newsletterWrapperLight {
+  composes: newsletterWrapper;
+  background-color: hsl(var(--card));
+  border-color: hsla(var(--foreground), 0.15);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.newsletterWrapperLight:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+}
+
+.mailIconWrapper {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.mailIconTextDark {
+  color: #d4d4d4;
+}
+
+.mailIconTextLight {
+  color: #737373;
+}
+
+.newsletterInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  outline: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.newsletterInputDark {
+  composes: newsletterInput;
+  color: #fff;
+}
+
+.newsletterInputDark::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletterInputLight {
+  composes: newsletterInput;
+  color: hsl(var(--foreground));
+}
+
+.newsletterInputLight::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.joinBtn {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.5s;
+  border: none;
+  cursor: pointer;
+}
+
+.joinBtn:hover {
+  transform: scale(1.05);
+}
+
+.joinBtn:active {
+  transform: scale(0.95);
+}
+
+.joinBtnDark {
+  composes: joinBtn;
+  background-color: #06b6d4;
+  color: #000;
+}
+
+.joinBtnDark:hover {
+  background-color: #22d3ee;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+.joinBtnLight {
+  composes: joinBtn;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+
+.joinBtnLight:hover {
+  background-color: hsl(var(--primary));
+  box-shadow: 0 20px 25px -5px hsla(var(--primary), 0.2);
+}
+
+.linksRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.actionLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.actionLinkDark {
+  composes: actionLink;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.actionLinkDark:hover {
+  color: #22d3ee;
+}
+
+.actionLinkLight {
+  composes: actionLink;
+  color: hsl(var(--muted-foreground));
+}
+
+.actionLinkLight:hover {
+  color: hsl(var(--primary));
+}
+
+.arrowIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+}

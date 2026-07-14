@@ -1,0 +1,115 @@
+.section {
+  position: relative;
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 24rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    gap: 6rem;
+  }
+}
+
+.creditRole {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.creditName {
+  font-size: 1.5rem;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .creditName {
+    font-size: 1.875rem;
+  }
+}
+
+.replayWrapper {
+  padding-top: 6rem;
+}
+
+.copyrightText {
+  font-size: 10px;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.replayBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.replayBtn:hover {
+  color: #fff;
+}
+
+.replayIconWrapper {
+  padding: 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.replayBtn:hover .replayIconWrapper {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.replayIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.grainOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url('/icons/noise.svg');
+}

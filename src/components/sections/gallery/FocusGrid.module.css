@@ -1,0 +1,267 @@
+.section {
+  position: relative;
+  min-height: 150vh;
+  background-color: hsl(var(--background));
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.lensOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 0.7s;
+}
+
+.gridWrapper {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  column-count: 1;
+  column-gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .gridWrapper {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridWrapper {
+    column-count: 3;
+  }
+}
+
+.gridWrapper > * + * {
+  margin-top: 2rem;
+}
+
+.card {
+  position: relative;
+  break-inside: avoid;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: auto;
+}
+
+.cardImage {
+  width: 100%;
+  object-fit: cover;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .cardOverlay {
+  opacity: 0;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  opacity: 1;
+}
+
+.category {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  color: hsl(var(--primary));
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* ─── Cinematic Lightbox ─── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .lightbox {
+    padding: 3rem;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  padding: 1rem;
+  z-index: 110;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.closeBtn:hover {
+  color: #fff;
+}
+
+.closeText {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  margin-right: 0.5rem;
+}
+
+.closeIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.lightboxContent {
+  width: 100%;
+  max-width: 80rem;
+  display: grid;
+  grid-template-cols: 1fr;
+  gap: 2rem;
+  height: 100%;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .lightboxContent {
+    grid-template-cols: repeat(3, minmax(0, 1fr));
+    height: auto;
+  }
+}
+
+.mediaWrapper {
+  position: relative;
+  aspect-ratio: 16/9;
+  background-color: #171717;
+  border-radius: 0.125rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 1024px) {
+  .mediaWrapper {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+}
+
+.sidebar > * + * {
+  margin-top: 2rem;
+}
+
+.sidebarTop {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebarSeqId {
+  font-size: 0.75rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  color: hsl(var(--primary));
+  margin: 0;
+}
+
+.sidebarTitle {
+  font-size: 2.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .sidebarTitle {
+    font-size: 3rem;
+  }
+}
+
+.sidebarDivider {
+  width: 3rem;
+  height: 4px;
+  background-color: hsl(var(--primary));
+  margin: 0;
+}
+
+.sidebarDesc {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  line-height: 1.625;
+  margin: 0;
+}
+
+.sidebarGrid {
+  display: grid;
+  grid-template-cols: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+}
+
+.metaHeader {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.metaValue {
+  font-family: monospace;
+  margin: 0;
+}

@@ -1,0 +1,228 @@
+.section {
+  background-color: hsl(var(--background));
+  color: #18181b;
+  position: relative;
+  z-index: 0;
+}
+
+:global(.dark) .section {
+  color: #fafafa;
+}
+
+.heroWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.fadeBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24rem;
+  background-image: linear-gradient(to bottom, transparent, hsl(var(--background)));
+  z-index: 20;
+  pointer-events: none;
+}
+
+.scrollIndicator {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-65%);
+  z-index: 50;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .scrollIndicator {
+    display: flex;
+  }
+}
+
+.centerImageWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  transform-origin: center;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.titleOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.titleCard {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  padding: clamp(60px, 15vh, 240px) clamp(24px, 8vw, 128px);
+  border-radius: clamp(2rem, 6vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 92vw;
+  max-width: 1600px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at center, #000 65%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 85% at center, #000 65%, transparent 100%);
+}
+
+:global(.dark) .titleCard {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cardGlow {
+  position: absolute;
+  inset: 0;
+  background-color: hsla(var(--primary), 0.02);
+  border-radius: clamp(2rem, 6vw, 4rem);
+  pointer-events: none;
+}
+
+.title {
+  font-size: clamp(3.5rem, 15vw, 15rem);
+  font-weight: 900;
+  color: hsl(var(--foreground));
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: clamp(24px, 4vh, 48px);
+  margin-left: -0.5rem;
+}
+
+:global(.dark) .title {
+  color: #fff;
+}
+
+.desc {
+  width: 100%;
+  max-width: 56rem;
+  text-align: center;
+  font-size: clamp(10px, 1.2vw, 14px);
+  font-weight: 700;
+  color: hsla(var(--foreground), 0.5);
+  letter-spacing: clamp(0.1em, 0.4em, 0.4em);
+  line-height: 1.625;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+:global(.dark) .desc {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+  .desc {
+    line-height: 2.2;
+  }
+}
+
+/* ─── Parallax Container ─── */
+.parallaxContainer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: grid;
+  grid-template-cols: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+  height: 100%;
+  align-items: flex-end;
+  padding-bottom: 10vh;
+}
+
+.colFast1 {
+  grid-column: span 3 / span 3;
+  grid-column-start: 2;
+}
+
+.colMod2 {
+  grid-column: span 3 / span 3;
+  grid-column-start: 10;
+  margin-bottom: 8rem;
+}
+
+.colSlow3 {
+  grid-column: span 4 / span 4;
+  grid-column-start: 5;
+  margin-bottom: 2.5rem;
+}
+
+.colVFast4 {
+  grid-column: span 3 / span 3;
+  grid-column-start: 1;
+  margin-bottom: 16rem;
+}
+
+.colFast5 {
+  grid-column: span 4 / span 4;
+  grid-column-start: 8;
+  margin-bottom: 10rem;
+}
+
+/* Parallax Images */
+.parallaxImg {
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  object-fit: cover;
+}
+
+.imgAspect4_3 {
+  composes: parallaxImg;
+  aspect-ratio: 4/3;
+}
+
+.imgAspectSquare {
+  composes: parallaxImg;
+  aspect-ratio: 1/1;
+}
+
+.imgAspectVideo {
+  composes: parallaxImg;
+  aspect-ratio: 16/9;
+}
+
+.imgAspect3_4 {
+  composes: parallaxImg;
+  aspect-ratio: 3/4;
+}

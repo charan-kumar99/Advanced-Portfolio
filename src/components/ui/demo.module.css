@@ -1,0 +1,64 @@
+.container {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 40rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  background-color: #ffffff;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.textOverlay {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5rem;
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.topParagraph {
+  width: 50vw;
+  align-self: flex-end;
+  font-size: 2vw;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
+}
+
+.bottomParagraph {
+  font-size: 5vw;
+  text-transform: uppercase;
+  mix-blend-mode: difference;
+}
+
+.parallaxBackground {
+  position: fixed;
+  top: -10vh;
+  left: 0;
+  height: 120vh;
+  width: 100%;
+}
+
+.fullSize {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.img {
+  object-fit: cover;
+}

@@ -1,0 +1,519 @@
+.wrapper {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.wrapper > * + * {
+  margin-top: 3rem;
+}
+
+.introCard {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-image: linear-gradient(to bottom right, hsla(var(--primary), 0.05), transparent 50%, hsla(var(--secondary), 0.05));
+  border: 1px solid hsla(var(--primary), 0.1);
+}
+
+:global(.dark) .introCard {
+  background-image: linear-gradient(to bottom right, hsla(var(--primary), 0.1), transparent 50%, hsla(var(--secondary), 0.1));
+}
+
+.introIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.introTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: hsl(var(--foreground));
+  text-transform: capitalize;
+}
+
+.introSubtitle {
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.5rem;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tabList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.tabButton {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.tabButtonActive {
+  composes: tabButton;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 10px 15px -3px hsla(var(--primary), 0.25);
+}
+
+.tabButtonInactive {
+  composes: tabButton;
+  background-color: hsla(var(--secondary), 0.5);
+  color: hsla(var(--foreground), 0.7);
+}
+
+.tabButtonInactive:hover {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+}
+
+.activeIndicator {
+  position: absolute;
+  inset: 0;
+  background-color: hsl(var(--primary));
+  border-radius: 9999px;
+  z-index: -10;
+}
+
+.tabContentContainer {
+  min-height: 400px;
+}
+
+/* ─── Education Content ─── */
+.eduGrid {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .eduGrid {
+    grid-template-cols: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.eduLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.eduIndicatorRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.eduBar {
+  width: 4px;
+  height: 2rem;
+  background-color: hsl(var(--primary));
+  border-radius: 9999px;
+}
+
+.eduLabel {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.166em;
+  text-transform: uppercase;
+}
+
+.eduHeading {
+  font-size: 2.25rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.05em;
+  color: hsl(var(--foreground));
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .eduHeading {
+    font-size: 3rem;
+  }
+}
+
+.eduHeadingWord {
+  display: block;
+}
+
+.eduDesc {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  max-width: 28rem;
+}
+
+.eduCard {
+  position: relative;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-image: linear-gradient(to bottom right, hsla(var(--primary), 0.05), hsla(var(--secondary), 0.1) 50%, hsla(var(--primary), 0.05));
+  border: 1px solid hsla(var(--primary), 0.1);
+}
+
+:global(.dark) .eduCard {
+  background-image: linear-gradient(to bottom right, hsla(var(--primary), 0.1), hsla(var(--secondary), 0.15) 50%, hsla(var(--primary), 0.1));
+}
+
+.eduCardIndex {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: hsla(var(--primary), 0.6);
+}
+
+.eduCardInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.eduCardIconWrapper {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: hsla(var(--primary), 0.1);
+}
+
+:global(.dark) .eduCardIconWrapper {
+  background-color: hsla(var(--primary), 0.2);
+}
+
+.eduCardTags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.eduCardTagPrimary {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: hsla(var(--primary), 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsla(var(--primary), 0.2);
+}
+
+.eduCardTagSec {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background-color: hsla(var(--secondary), 0.5);
+  color: hsl(var(--foreground));
+  border: 1px solid hsla(var(--secondary), 0.3);
+}
+
+.timelineToggleBtn {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsla(var(--primary), 0.2);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.timelineToggleBtn:hover {
+  border-color: hsla(var(--primary), 0.4);
+}
+
+.timelineToggleLabel {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: hsl(var(--muted-foreground));
+  letter-spacing: 0.166em;
+  text-transform: uppercase;
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+.timelineItem {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: hsla(var(--secondary), 0.3);
+  transition: background-color 0.3s;
+}
+
+.timelineItem:hover {
+  background-color: hsla(var(--secondary), 0.5);
+}
+
+.timelineIconWrapper {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: hsla(var(--primary), 0.1);
+  height: fit-content;
+}
+
+.timelineBody {
+  flex: 1;
+}
+
+.timelineTitle {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.timelineDegree {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+.timelineDate {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.timelineGpa {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--primary));
+}
+
+/* ─── Journey Content ─── */
+.journeyIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.journeyHeading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .journeyHeading {
+    font-size: 2.25rem;
+  }
+}
+
+.journeyDesc {
+  color: hsl(var(--muted-foreground));
+  max-width: 32rem;
+  margin: 0;
+}
+
+.journeyList {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.journeyItem {
+  position: relative;
+}
+
+.journeyRow {
+  display: flex;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.journeyYearCol {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 100px;
+}
+
+.journeyDot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: hsla(var(--primary), 0.5);
+  border: 2px solid hsl(var(--primary));
+}
+
+.journeyYear {
+  font-size: 1.875rem;
+  font-weight: 300;
+  color: hsla(var(--muted-foreground), 0.5);
+}
+
+@media (min-width: 768px) {
+  .journeyYear {
+    font-size: 2.25rem;
+  }
+}
+
+.journeyContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-left: 1px solid hsl(var(--border));
+  padding-left: 1.5rem;
+}
+
+.journeyExpCard {
+  position: relative;
+}
+
+.journeyExpDot {
+  position: absolute;
+  left: -29px; /* -1.5rem (24px) - half dot width (5px) */
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--secondary));
+}
+
+.journeyExpHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .journeyExpHeader {
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+}
+
+.journeyExpTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.journeyExpCompany {
+  color: hsl(var(--primary));
+  font-weight: 500;
+  margin: 0;
+}
+
+.journeyExpDate {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: hsl(var(--muted-foreground));
+  background-color: hsla(var(--secondary), 0.5);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.journeyExpDesc {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+}
+
+.journeyExpResponsibilities {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+  padding: 0;
+}
+
+.journeyExpRespItem {
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.journeyExpRespBullet {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+  color: hsl(var(--primary));
+  flex-shrink: 0;
+}
+
+.journeyExpSkills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.journeyExpSkill {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: hsla(var(--secondary), 0.5);
+  color: hsl(var(--muted-foreground));
+  border: 1px solid hsla(var(--secondary), 0.3);
+}
+
+/* ─── Coming Soon ─── */
+.soonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.soonIconWrapper {
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background-color: hsla(var(--primary), 0.1);
+}
+
+.soonTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+.soonDesc {
+  color: hsl(var(--muted-foreground));
+  max-width: 28rem;
+  margin: 0;
+}

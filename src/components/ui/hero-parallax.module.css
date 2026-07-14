@@ -1,0 +1,256 @@
+.container {
+  padding-top: 2.5rem;
+  padding-bottom: 5rem;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: auto;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-bottom: 10rem;
+  }
+}
+
+.containerLowPower {
+  height: 100vh;
+}
+
+@media (min-width: 640px) {
+  .containerLowPower {
+    height: 120vh;
+  }
+}
+
+.containerNormal {
+  height: 180vh;
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+@media (min-width: 640px) {
+  .containerNormal {
+    height: 200vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .containerNormal {
+    height: 250vh;
+  }
+}
+
+.rowReverse {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 5rem;
+}
+
+.rowReverse > * + * {
+  margin-right: 5rem;
+}
+
+.rowReverseLowPower {
+  margin-bottom: 2.5rem;
+}
+
+.rowReverseLowPower > * + * {
+  margin-right: 2.5rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5rem;
+}
+
+.row > * + * {
+  margin-left: 5rem;
+}
+
+.rowLowPower {
+  margin-bottom: 2.5rem;
+}
+
+.rowLowPower > * + * {
+  margin-left: 2.5rem;
+}
+
+.headerContainer {
+  max-width: 80rem;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+@media (min-width: 768px) {
+  .headerContainer {
+    padding-top: 12rem;
+  }
+}
+
+.headerTitle {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .headerTitle {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+}
+
+:global(.dark) .headerTitle {
+  color: #ffffff;
+}
+
+.headerSubtitle {
+  max-width: 42rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .headerSubtitle {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+:global(.dark) .headerSubtitle {
+  color: #e5e5e5;
+}
+
+.scrollIndicator {
+  position: absolute;
+  left: 1rem;
+  bottom: -8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .scrollIndicator {
+    bottom: -12rem;
+  }
+}
+
+.scrollTrack {
+  width: 1px;
+  height: 2.5rem;
+  background-image: linear-gradient(to bottom, transparent, #9ca3af, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .scrollTrack {
+    height: 4rem;
+  }
+}
+
+.scrollThumb {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #ffffff;
+  filter: blur(1px);
+}
+
+.scrollText {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #737373;
+  font-weight: 500;
+}
+
+.productCard {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.productCardLowPower {
+  height: 12rem;
+  width: 12rem;
+}
+
+@media (min-width: 768px) {
+  .productCardLowPower {
+    height: 16rem;
+    width: 20rem;
+  }
+}
+
+.productCardNormal {
+  height: 16rem;
+  width: 16rem;
+}
+
+@media (min-width: 768px) {
+  .productCardNormal {
+    height: 24rem;
+    width: 30rem;
+  }
+}
+
+.productLink {
+  display: block;
+}
+
+.productCard:hover .productLink {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.productImage {
+  object-fit: cover;
+  object-position: left top;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+}
+
+.productOverlay {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  background-color: #000000;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.productCard:hover .productOverlay {
+  opacity: 0.8;
+}
+
+.productTitle {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  opacity: 0;
+  color: #ffffff;
+  transition: opacity 0.3s;
+}
+
+.productCard:hover .productTitle {
+  opacity: 1;
+}

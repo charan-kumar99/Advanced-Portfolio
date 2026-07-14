@@ -1,0 +1,15 @@
+.fullLayout {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contents {
+  display: contents;
+}
+
+.mainContent {
+  flex: 1;
+  position: relative;
+}

@@ -1,0 +1,362 @@
+.section {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: auto;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-radius: 2.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    min-height: 35rem;
+  }
+}
+
+:global(.dark) .card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #000000;
+}
+
+.leftContent {
+  width: 100%;
+  z-index: 10;
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .leftContent {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .leftContent {
+    width: 55%;
+    padding: 3.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .leftContent {
+    padding: 5rem;
+  }
+}
+
+.heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font-size: 4.5rem;
+  }
+}
+
+:global(.dark) .heading {
+  color: #ffffff;
+}
+
+.description {
+  color: #6b7280;
+  margin-bottom: 2.5rem;
+  max-width: 36rem;
+  font-size: 1rem;
+  line-height: 1.625;
+}
+
+@media (min-width: 768px) {
+  .description {
+    font-size: 1.125rem;
+  }
+}
+
+:global(.dark) .description {
+  color: #9ca3af;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .buttonGroup {
+    gap: 1rem;
+  }
+}
+
+.btnPrimary {
+  border-radius: 9999px;
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.btnPrimary:hover {
+  background-color: hsla(var(--primary), 0.9);
+}
+
+@media (min-width: 640px) {
+  .btnPrimary {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .btnPrimary {
+    padding: 1.5rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+.btnOutline {
+  border-radius: 9999px;
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .btnOutline {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .btnOutline {
+    padding: 1.5rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+:global(.dark) .btnOutline {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) .btnOutline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.rightContent {
+  position: relative;
+  width: 100%;
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .rightContent {
+    height: 30rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .rightContent {
+    width: 45%;
+    height: 100%;
+    min-height: 35rem;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+}
+
+.orbitContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40rem;
+  height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .orbitContainer {
+    left: auto;
+    right: 0;
+    transform: translate(50%, -50%);
+    width: 60rem;
+    height: 60rem;
+  }
+}
+
+.centerCircle {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .centerCircle {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+:global(.dark) .centerCircle {
+  background-color: #111827;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.centerIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (min-width: 768px) {
+  .centerIcon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.orbitLine {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px dashed #d1d5db;
+}
+
+:global(.dark) .orbitLine {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.iconWrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.iconBubble {
+  background-color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.625rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f3f4f6;
+}
+
+@media (min-width: 768px) {
+  .iconBubble {
+    padding: 0.75rem;
+  }
+}
+
+:global(.dark) .iconBubble {
+  background-color: #111827;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.orbitIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+
+@media (min-width: 768px) {
+  .orbitIcon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@keyframes stackOrbitSpin {
+  from { transform: rotate(0deg) translateZ(0); }
+  to { transform: rotate(360deg) translateZ(0); }
+}
+
+@keyframes stackOrbitSpinReverse {
+  from { transform: rotate(360deg) translateZ(0); }
+  to { transform: rotate(0deg) translateZ(0); }
+}
+
+.centerSpin {
+  animation: stackOrbitSpin 15s linear infinite !important;
+  will-change: transform;
+}
+
+.orbit0 { animation: stackOrbitSpin 30s linear infinite !important; will-change: transform; }
+.orbitIcon0 { animation: stackOrbitSpinReverse 30s linear infinite !important; will-change: transform; }
+
+.orbit1 { animation: stackOrbitSpin 45s linear infinite !important; will-change: transform; }
+.orbitIcon1 { animation: stackOrbitSpinReverse 45s linear infinite !important; will-change: transform; }
+
+.orbit2 { animation: stackOrbitSpin 60s linear infinite !important; will-change: transform; }
+.orbitIcon2 { animation: stackOrbitSpinReverse 60s linear infinite !important; will-change: transform; }

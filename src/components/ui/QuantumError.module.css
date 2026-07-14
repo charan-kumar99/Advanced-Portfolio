@@ -1,0 +1,248 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+:global(.dark) .container {
+  background-color: #000000;
+}
+
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.titleWrapper {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 12rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: hsl(var(--foreground));
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 18rem;
+  }
+}
+
+.ghost {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.ghostTitle {
+  font-size: 12rem;
+  font-weight: 900;
+  color: hsl(var(--primary));
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .ghostTitle {
+    font-size: 18rem;
+  }
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 28rem;
+}
+
+.badge {
+  padding: 0.5rem 1.25rem;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5em;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .badge {
+    font-size: 0.875rem;
+  }
+}
+
+.desc {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-top: 0.25rem;
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 1rem;
+  }
+}
+
+.navRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+@media (min-width: 640px) {
+  .navRow {
+    flex-direction: row;
+  }
+}
+
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  padding-right: 2.5rem;
+}
+
+.arrowWrapper {
+  position: absolute;
+  right: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn:hover .arrowWrapper {
+  opacity: 1;
+}
+
+.textBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.textBtn:hover {
+  color: hsl(var(--foreground));
+}
+
+.infoPanel {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  z-index: 20;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .infoPanel {
+    display: block;
+  }
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-mono), monospace;
+  text-align: left;
+  user-select: none;
+}
+
+.infoTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: hsl(var(--primary));
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  opacity: 0.8;
+}
+
+.infoDate {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+:global(.dark) .infoDate {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.infoTime {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+:global(.dark) .infoTime {
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url('/icons/noise.svg');
+}
+
+:global(.dark) .noise {
+  opacity: 0.05;
+}

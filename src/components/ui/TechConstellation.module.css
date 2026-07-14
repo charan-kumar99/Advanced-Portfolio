@@ -1,0 +1,104 @@
+.container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .container {
+    aspect-ratio: 16/9;
+  }
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.lineText {
+  color: hsl(var(--primary));
+}
+
+.node {
+  position: absolute;
+  cursor: pointer;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background-color: hsla(var(--primary), 0.2);
+  border-radius: 9999px;
+  filter: blur(24px);
+  display: none;
+}
+
+.node:hover .glow {
+  display: block;
+}
+
+.card {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(64px);
+  transition: all 0.5s;
+}
+
+@media (min-width: 768px) {
+  .card {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.node:hover .card {
+  border-color: hsl(var(--primary));
+  background-color: hsla(var(--primary), 0.1);
+}
+
+.icon {
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.5s;
+}
+
+.node:hover .icon {
+  filter: grayscale(0%);
+}
+
+.label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.node:hover .label {
+  opacity: 1;
+}
+```,Description:

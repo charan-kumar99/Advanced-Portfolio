@@ -1,0 +1,18 @@
+.container {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.scroller {
+  display: flex;
+  white-space: nowrap;
+  gap: 2.5rem;
+  flex-wrap: nowrap;
+}
+
+.item {
+  display: block;
+  font-size: 5vw;
+}

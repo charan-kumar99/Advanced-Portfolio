@@ -1,0 +1,16 @@
+.container {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.text {
+  line-height: 1.625;
+  position: relative;
+  z-index: 10;
+}
+
+.word {
+  display: inline-block;
+}

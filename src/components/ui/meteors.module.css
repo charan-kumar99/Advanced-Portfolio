@@ -1,0 +1,37 @@
+.meteor {
+  pointer-events: none;
+  position: absolute;
+  width: 0.375rem; /* size-1.5 */
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+  box-shadow: 0 0 20px 4px hsl(var(--primary) / 0.4);
+  will-change: transform;
+  z-index: 100;
+  animation: meteor 5s linear infinite;
+}
+
+.tail {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  z-index: -10;
+  height: 2px;
+  width: 100px;
+  transform: translateY(-50%);
+  background-image: linear-gradient(to right, hsl(var(--primary) / 0.4), transparent);
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;
+  }
+}

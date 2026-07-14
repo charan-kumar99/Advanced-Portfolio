@@ -1,0 +1,269 @@
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  height: 220px;
+  cursor: none;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .container {
+    height: 280px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    height: 350px;
+  }
+}
+
+.dragCursor {
+  pointer-events: none;
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background-color: rgba(10, 10, 10, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(24px);
+}
+
+:global(.dark) .dragCursor {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dragText {
+  font-size: 10px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+:global(.dark) .dragText {
+  color: #ffffff;
+}
+
+.glimmer {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05) 50%, transparent);
+  transform: translateX(-100%);
+  animation: glimmerMove 3s infinite;
+}
+
+:global(.dark) .glimmer {
+  background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05) 50%, transparent);
+}
+
+@keyframes glimmerMove {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+.captureSurface {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  cursor: none;
+}
+
+.archWheel {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  width: 800px;
+  height: 800px;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  pointer-events: none;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .archWheel {
+    top: 40px;
+    width: 1200px;
+    height: 1200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .archWheel {
+    top: 60px;
+    width: 1700px;
+    height: 1700px;
+  }
+}
+
+.wheelInner {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.iconSlot {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.iconWrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -28px;
+  margin-top: -28px;
+  width: 56px;
+  height: 56px;
+}
+
+@media (min-width: 640px) {
+  .iconWrapper {
+    margin-left: -32px;
+    margin-top: -32px;
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (min-width: 768px) {
+  .iconWrapper {
+    margin-left: -42px;
+    margin-top: -42px;
+    width: 84px;
+    height: 84px;
+  }
+}
+
+.iconCard {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .iconCard {
+  background-color: rgba(10, 10, 10, 0.95);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .iconCard {
+    border-radius: 18px;
+    padding: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .iconCard {
+    border-radius: 22px;
+    padding: 1rem;
+  }
+}
+
+.iconRelative {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.imgContain {
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+/* Ambient Gradients */
+.gradientBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4rem;
+  background-image: linear-gradient(to top, hsl(var(--background)), hsla(var(--background), 0.8) 50%, transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .gradientBottom {
+    height: 5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .gradientBottom {
+    height: 7rem;
+  }
+}
+
+.gradientLeft {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  background-image: linear-gradient(to right, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .gradientLeft {
+    width: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .gradientLeft {
+    width: 8rem;
+  }
+}
+
+.gradientRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 2rem;
+  background-image: linear-gradient(to left, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .gradientRight {
+    width: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .gradientRight {
+    width: 8rem;
+  }
+}

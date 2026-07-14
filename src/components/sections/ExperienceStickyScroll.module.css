@@ -1,0 +1,146 @@
+.wrapper {
+  width: 100%;
+}
+
+.journeyCard {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .journeyCard {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.overlayBlue {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom right, rgba(23, 37, 84, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.8));
+}
+
+.overlayOrange {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom right, rgba(124, 45, 18, 0.5), rgba(136, 19, 55, 0.3) 50%, rgba(0, 0, 0, 0.8));
+  mix-blend-mode: multiply;
+}
+
+.journeyContentInner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconContainer {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.journeyIcon {
+  width: 5rem;
+  height: 5rem;
+  color: #fff;
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
+}
+
+.animatePulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animateBounce {
+  animation: bounce 1s infinite;
+}
+
+.animatePulseCustom {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.binaryIcon {
+  width: 2rem;
+  height: 2rem;
+  color: #60a5fa;
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  opacity: 0.8;
+}
+
+.sparklesIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #facc15;
+  position: absolute;
+  bottom: -0.5rem;
+  left: -0.5rem;
+}
+
+.hoverRotate {
+  transition: transform 0.5s;
+}
+
+.journeyCard:hover .hoverRotate {
+  transform: rotate(6deg);
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: monospace;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.subLabel {
+  font-size: 10px;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  margin: 0;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}

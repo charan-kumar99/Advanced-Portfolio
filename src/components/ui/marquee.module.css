@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  overflow: hidden;
+  --gap: 1rem;
+}
+
+.pauseOnHover:hover .inner {
+  animation-play-state: paused;
+}
+
+.inner {
+  display: flex;
+  gap: var(--gap);
+  animation-name: marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.reverse {
+  animation-name: marquee-reverse;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

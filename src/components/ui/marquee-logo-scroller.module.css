@@ -1,0 +1,191 @@
+.section {
+  width: 100%;
+  background-color: hsla(var(--background), 0.5);
+  backdrop-filter: blur(4px);
+  color: hsl(var(--foreground));
+  border-radius: 2.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: all 0.5s;
+}
+
+:global(.dark) .section {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.header {
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: 4rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-cols: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+:global(.dark) .grid {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-cols: 3fr 2fr;
+    gap: 3rem;
+  }
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+.desc {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  align-self: flex-start;
+  text-wrap: balance;
+  line-height: 1.625;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desc {
+    align-self: flex-end;
+  }
+}
+
+.marqueeViewport {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 3rem;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-right: 1.5rem;
+  cursor: pointer;
+}
+
+.track:hover {
+  animation-play-state: paused;
+}
+
+.card {
+  position: relative;
+  height: 12rem;
+  width: 18rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.5rem;
+  background-color: hsla(var(--secondary), 0.3);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.5s;
+}
+
+:global(.dark) .card {
+  background-color: rgba(24, 24, 27, 0.5);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.gradientBg {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.5);
+  opacity: 0;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  background-image: linear-gradient(to bottom right, var(--from), var(--via), var(--to));
+}
+
+.card:hover .gradientBg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  transition: background-color 0.5s;
+}
+
+:global(.dark) .overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .overlay {
+  background-color: transparent;
+}
+
+.img {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.card:hover .img {
+  transform: scale(1.1);
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 1s;
+}
+
+.card:hover .shine {
+  transform: translateX(100%);
+}

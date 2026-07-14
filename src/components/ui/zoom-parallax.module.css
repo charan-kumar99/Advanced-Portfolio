@@ -1,0 +1,131 @@
+.container {
+  position: relative;
+  height: 300vh;
+  z-index: 1;
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cardWrapper {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.innerCard {
+  position: relative;
+  height: 25vh;
+  width: 25vw;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: hsla(var(--muted), 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.cardIndex1 .innerCard {
+  top: -30vh !important;
+  left: 5vw !important;
+  height: 30vh !important;
+  width: 35vw !important;
+}
+
+.cardIndex2 .innerCard {
+  top: -10vh !important;
+  left: -25vw !important;
+  height: 45vh !important;
+  width: 20vw !important;
+}
+
+.cardIndex3 .innerCard {
+  left: 27.5vw !important;
+  height: 25vh !important;
+  width: 25vw !important;
+}
+
+.cardIndex4 .innerCard {
+  top: 27.5vh !important;
+  left: 5vw !important;
+  height: 25vh !important;
+  width: 20vw !important;
+}
+
+.cardIndex5 .innerCard {
+  top: 27.5vh !important;
+  left: -22.5vw !important;
+  height: 25vh !important;
+  width: 30vw !important;
+}
+
+.cardIndex6 .innerCard {
+  top: 22.5vh !important;
+  left: 25vw !important;
+  height: 15vh !important;
+  width: 15vw !important;
+}
+
+.childrenWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.childrenWrapper:hover .img {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.5s;
+  pointer-events: none;
+}
+
+.childrenWrapper:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.childrenContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.plainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

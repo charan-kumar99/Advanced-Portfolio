@@ -1,0 +1,449 @@
+.section {
+  position: relative;
+  height: 400vh;
+}
+
+.stickyBox {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.bgSchematic {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.03;
+}
+
+.track {
+  display: flex;
+  gap: 12rem;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  align-items: center;
+  position: relative;
+}
+
+.wire {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image: linear-gradient(to right, transparent, hsla(var(--primary), 0.3), transparent);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.glowWire {
+  position: absolute;
+  inset: 0;
+  background-color: hsla(var(--primary), 0.2);
+  filter: blur(4px);
+}
+
+.nodeGroup {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+
+.phantom {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .phantom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.1;
+    filter: blur(1px);
+    transform: translateY(-6rem);
+  }
+}
+
+.phantomCircle {
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phantomLabel {
+  font-size: 6px;
+  font-family: var(--font-mono), monospace;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8em;
+}
+
+.mainNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 420px;
+  padding: 3rem;
+  border-radius: 4rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(64px);
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.nodeGroup:hover .card {
+  border-color: hsla(var(--primary), 0.5);
+}
+
+.cardLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, hsla(var(--primary), 0.5), transparent);
+  transform: scaleX(0);
+  transition: transform 1s;
+}
+
+.nodeGroup:hover .cardLine {
+  transform: scaleX(1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.iconWrapper {
+  width: 6rem;
+  height: 6rem;
+  position: relative;
+  filter: grayscale(100%);
+  transition: all 0.75s;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+}
+
+.nodeGroup:hover .iconWrapper {
+  filter: grayscale(0%);
+  background-color: hsla(var(--primary), 0.05);
+}
+
+.img {
+  object-fit: contain;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 2.25rem;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  transition: color 0.5s;
+  line-height: 1;
+  margin: 0;
+}
+
+.nodeGroup:hover .cardTitle {
+  color: hsl(var(--primary));
+}
+
+.syncRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.syncDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+  box-shadow: 0 0 8px hsla(var(--primary), 0.6);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.syncText {
+  font-size: 9px;
+  font-family: var(--font-mono), monospace;
+  color: hsla(var(--primary), 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 900;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.archTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radioIcon {
+  color: hsla(var(--primary), 0.4);
+}
+
+.archLabel {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: hsla(var(--muted-foreground), 0.6);
+}
+
+.archSys {
+  font-size: 9px;
+  font-family: var(--font-mono), monospace;
+  color: hsla(var(--primary), 0.4);
+}
+
+.progressBar {
+  height: 0.375rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-image: linear-gradient(to right, hsla(var(--primary), 0.2), hsl(var(--primary)), hsla(var(--primary), 0.4));
+}
+
+.pipeJoiner {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .pipeJoiner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    position: relative;
+  }
+}
+
+.activityCircle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid hsla(var(--primary), 0.4);
+  background-color: hsl(var(--background));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 20px hsla(var(--primary), 0.2);
+}
+
+.activityPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--primary));
+  box-shadow: 0 0 25px hsl(var(--primary));
+}
+
+.flowParticle {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: hsl(var(--primary));
+  border-radius: 9999px;
+  filter: blur(2px);
+}
+
+.topOverlay {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: 3rem;
+  color: hsla(var(--primary), 0.2);
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 1em;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .topOverlay {
+    display: flex;
+  }
+}
+
+.overlayLine {
+  width: 8rem;
+  height: 1px;
+  background-color: hsla(var(--primary), 0.2);
+}
+
+.consolePanel {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  padding: 2rem;
+  border: 1px solid hsla(var(--primary), 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 2rem;
+  width: 20rem;
+  display: none;
+  z-index: 20;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 1024px) {
+  .consolePanel {
+    display: block;
+  }
+}
+
+.consoleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid hsla(var(--primary), 0.1);
+  padding-bottom: 1rem;
+}
+
+.consoleTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--primary));
+}
+
+.consoleMeta {
+  font-size: 8px;
+  font-family: var(--font-mono), monospace;
+  color: hsla(var(--primary), 0.4);
+}
+
+.consoleLogs {
+  height: 10rem;
+  overflow: hidden;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+}
+
+.consoleLogs > * + * {
+  margin-top: 0.5rem;
+}
+
+.logRow {
+  display: flex;
+  gap: 0.5rem;
+  color: hsla(var(--primary), 0.6);
+}
+
+.logTime {
+  color: hsla(var(--primary), 0.2);
+}
+
+.logText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sideScroll {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .sideScroll {
+    display: flex;
+  }
+}
+
+.sideLine {
+  height: 16rem;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.sideProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: hsl(var(--primary));
+}
+
+.sideLabel {
+  font-size: 8px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  transform: rotate(90deg);
+  color: hsla(var(--primary), 0.4);
+  margin-top: 3rem;
+}

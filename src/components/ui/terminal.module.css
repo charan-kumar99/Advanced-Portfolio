@@ -1,0 +1,58 @@
+.container {
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  max-height: 400px;
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #000000;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  color: #e2e8f0;
+}
+
+.header {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dotRed {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 9999px;
+  background-color: #ef4444;
+}
+
+.dotYellow {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 9999px;
+  background-color: #eab308;
+}
+
+.dotGreen {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 9999px;
+  background-color: #22c55e;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  padding: 1rem;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+}

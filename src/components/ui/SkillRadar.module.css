@@ -1,0 +1,23 @@
+.ring {
+  color: hsla(var(--primary), 0.1);
+}
+
+.axis {
+  color: hsla(var(--primary), 0.1);
+}
+
+.poly {
+  color: hsla(var(--primary), 0.2);
+}
+
+.pulse {
+  opacity: 0.2;
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  fill: hsla(var(--muted-foreground), 0.6);
+}

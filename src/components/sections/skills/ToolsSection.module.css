@@ -1,0 +1,217 @@
+.section {
+  position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-color: hsl(var(--background));
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgAmbience {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, hsl(var(--background)) 0%, #050505 100%);
+  z-index: 0;
+}
+
+.header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 6rem;
+  pointer-events: none;
+  user-select: none;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: hsl(var(--foreground));
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: hsl(var(--foreground));
+  margin-bottom: 2rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 5rem;
+  }
+}
+
+.desc {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.125rem;
+  color: hsla(var(--foreground), 0.6);
+  line-height: 1.625;
+  font-weight: 500;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 1.25rem;
+  }
+}
+
+.marqueeContainer {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .marqueeContainer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .marqueeContainer {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.marqueeRows {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  transform: translateZ(0); 
+}
+
+.marqueeRowWrapper {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+}
+
+/* Tool Pill */
+.toolPill {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 2.5rem;
+  background-color: rgba(10, 10, 10, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  transition: all 0.3s;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+:global(.dark) .toolPill {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.toolPill:hover {
+  transform: scale(1.05);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .toolPill:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.toolImageWrapper {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .toolImageWrapper {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.toolImage {
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: all 0.5s;
+}
+
+.toolPill:hover .toolImage {
+  filter: grayscale(0%);
+}
+
+:global(.dark) .toolPill:hover .toolImage {
+  filter: grayscale(0%) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+}
+
+.toolImageGithub {
+  composes: toolImage;
+}
+
+:global(.dark) .toolImageGithub {
+  filter: grayscale(100%) invert(1);
+}
+
+:global(.dark) .toolPill:hover .toolImageGithub {
+  filter: grayscale(0%) invert(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+}
+
+.toolName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(0, 0, 0, 0.7);
+  transition: color 0.3s;
+}
+
+:global(.dark) .toolName {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.toolPill:hover .toolName {
+  color: #000;
+}
+
+:global(.dark) .toolPill:hover .toolName {
+  color: #fff;
+}

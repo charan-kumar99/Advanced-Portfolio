@@ -1,0 +1,462 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+}
+
+:global(.dark) .container {
+  background-color: #000;
+}
+
+.phase0 {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translateY(-3rem);
+}
+
+.magneticGroup {
+  margin-bottom: 4rem;
+  pointer-events: auto;
+}
+
+.triggerGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btnTextWrapper {
+  position: relative;
+  padding: 1.25rem 2.5rem;
+  border-radius: 9999px;
+  background-color: #d1ff4d;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.btnHoverBg {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  transform: translateX(-101%);
+  transition: transform 0.5s ease-out;
+}
+
+:global(.dark) .btnHoverBg {
+  background-color: #fff;
+}
+
+.triggerGroup:hover .btnHoverBg {
+  transform: translateX(0);
+}
+
+.btnTextScroll {
+  position: relative;
+  z-index: 10;
+  height: 1.75rem;
+  overflow: hidden;
+}
+
+.btnTextTrack {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-out;
+}
+
+.triggerGroup:hover .btnTextTrack {
+  transform: translateY(-50%);
+}
+
+.btnText {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  transition: color 0.5s;
+}
+
+.triggerGroup:hover .btnText {
+  color: #fff;
+}
+
+:global(.dark) .triggerGroup:hover .btnText {
+  color: #000;
+}
+
+.btnArrowWrapper {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background-color: #d1ff4d;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.triggerGroup:hover .btnArrowTrack {
+  transform: translateY(-50%);
+}
+
+.btnArrowTrack {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-out;
+}
+
+.arrowIcon {
+  width: 2rem;
+  height: 2rem;
+  color: #000;
+  transition: color 0.5s;
+}
+
+.triggerGroup:hover .arrowIcon {
+  color: #fff;
+}
+
+:global(.dark) .triggerGroup:hover .arrowIcon {
+  color: #000;
+}
+
+.labelsLayer {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.scrollIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #71717a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+:global(.dark) .scrollIndicator {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.arrowDown {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.storyText {
+  color: #71717a;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+:global(.dark) .storyText {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Main Card ─── */
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: bottom;
+  z-index: 10;
+}
+
+.scrollingWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marqueeHeaderSection {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.marqueeInner {
+  width: 100%;
+}
+
+.marqueeTitle {
+  font-size: 10rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  color: #000;
+  line-height: 1;
+}
+
+:global(.dark) .marqueeTitle {
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .marqueeTitle {
+    font-size: 16rem;
+  }
+}
+
+.marqueeIconCircle {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 9999px;
+  background-color: #d1ff4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+@media (min-width: 768px) {
+  .marqueeIconCircle {
+    width: 12rem;
+    height: 12rem;
+  }
+}
+
+.marqueeIconSvg {
+  width: 5rem;
+  height: 5rem;
+  fill: #000;
+}
+
+:global(.dark) .marqueeIconSvg {
+  fill: #18181b;
+}
+
+@media (min-width: 768px) {
+  .marqueeIconSvg {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+/* Text Section */
+.textSection {
+  width: 100%;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .textSection {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .textSection {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+.textGrid {
+  display: grid;
+  grid-template-cols: 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .textGrid {
+    grid-template-cols: repeat(12, minmax(0, 1fr));
+    gap: 4rem;
+  }
+}
+
+.titleCol {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .titleCol {
+    grid-column: span 7;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.375;
+  color: #000;
+  margin: 0;
+}
+
+:global(.dark) .title {
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 2.25rem;
+  }
+}
+
+.descCol {
+  grid-column: span 1;
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .descCol {
+    grid-column: span 5;
+  }
+}
+
+.desc {
+  font-size: 13px;
+  color: #71717a;
+  line-height: 1.625;
+  font-weight: 400;
+  margin: 0;
+}
+
+:global(.dark) .desc {
+  color: #a1a1aa;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 15px;
+  }
+}
+
+/* Scroller Section */
+.scrollerSection {
+  width: 100%;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-shrink: 0;
+}
+
+.scrollerHeadingWrapper {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .scrollerHeadingWrapper {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scrollerHeadingWrapper {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+.scrollerHeading {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #71717a;
+  margin: 0;
+}
+
+:global(.dark) .scrollerHeading {
+  color: #a1a1aa;
+}
+
+@media (min-width: 768px) {
+  .scrollerHeading {
+    font-size: 1.25rem;
+  }
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+:global(.dark) .gridOverlay {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px);
+}
+
+.centerGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  height: 40vw;
+  max-width: 500px;
+  max-height: 500px;
+  background: radial-gradient(circle, rgba(209, 255, 77, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(50px);
+}
+
+:global(.dark) .centerGlow {
+  background: radial-gradient(circle, rgba(209, 255, 77, 0.18) 0%, transparent 70%);
+}

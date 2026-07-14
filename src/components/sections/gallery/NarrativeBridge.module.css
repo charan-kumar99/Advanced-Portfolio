@@ -1,0 +1,138 @@
+.section {
+  position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.noiseOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image: url('/icons/noise.svg');
+}
+
+.contentInner {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.iconContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.iconWrapper {
+  padding: 1rem;
+  border-radius: 9999px;
+  background-color: hsla(var(--background), 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid hsla(var(--background), 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: hsla(var(--background), 0.8);
+}
+
+.title {
+  font-size: 2.25rem;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  line-height: 1.25;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 4.5rem;
+  }
+}
+
+.titleItalic {
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.titleAccent {
+  font-style: italic;
+  color: hsl(var(--primary));
+}
+
+.desc {
+  font-size: 1.125rem;
+  font-family: monospace;
+  opacity: 0.6;
+  margin-bottom: 3rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.625;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .desc {
+    font-size: 1.25rem;
+  }
+}
+
+.actionLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 3rem;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: 9999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.actionLink:hover {
+  transform: scale(1.05);
+}
+
+.arrowIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s;
+}
+
+.actionLink:hover .arrowIcon {
+  transform: translateX(0.5rem);
+}
+
+.bottomFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  background-image: linear-gradient(to top, hsla(var(--background), 0.1), transparent);
+  pointer-events: none;
+}

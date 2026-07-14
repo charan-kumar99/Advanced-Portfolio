@@ -1,0 +1,291 @@
+.section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+:global(.dark) .canvas {
+  opacity: 0.2;
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+}
+
+:global(.dark) .gridOverlay {
+  opacity: 0.02;
+}
+
+.orbRight {
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+  width: 24rem;
+  height: 24rem;
+  background-color: hsla(var(--primary), 0.2);
+  filter: blur(100px);
+  border-radius: 9999px;
+}
+
+:global(.dark) .orbRight {
+  background-color: hsla(var(--primary), 0.1);
+}
+
+.orbLeft {
+  position: absolute;
+  bottom: 5rem;
+  left: 5rem;
+  width: 24rem;
+  height: 24rem;
+  background-color: hsla(var(--secondary), 0.2);
+  filter: blur(100px);
+  border-radius: 9999px;
+}
+
+:global(.dark) .orbLeft {
+  background-color: hsla(var(--secondary), 0.1);
+}
+
+.containerInner {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .containerInner {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .containerInner {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+.terminalWrapper {
+  width: 100%;
+  max-width: 56rem;
+}
+
+.terminalHeader {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.windowControlWrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.windowControlRed {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: #ef4444;
+}
+
+.windowControlYellow {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: #eab308;
+}
+
+.windowControlGreen {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background-color: #22c55e;
+}
+
+.terminalTitle {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.terminalWindow {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid hsla(var(--foreground), 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+:global(.dark) .terminalWindow {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 768px) {
+  .terminalWindow {
+    padding: 2rem;
+  }
+}
+
+.promptLine {
+  margin-bottom: 1rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+  color: hsl(var(--primary));
+}
+
+.promptVisitor {
+  color: #4ade80;
+}
+
+.promptAt {
+  color: hsl(var(--muted-foreground));
+}
+
+.promptHost {
+  color: #60a5fa;
+}
+
+.promptColon {
+  color: hsl(var(--muted-foreground));
+}
+
+.promptCmd {
+  color: #facc15;
+}
+
+.promptArg {
+  color: hsla(var(--foreground), 0.8);
+}
+
+.terminalBody {
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .terminalBody {
+    padding-left: 1rem;
+  }
+}
+
+/* Typewriter Text */
+.typewriterWrapper {
+  font-family: monospace;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  white-space: pre-wrap;
+}
+
+@media (min-width: 768px) {
+  .typewriterWrapper {
+    font-size: 1rem;
+  }
+}
+
+.typewriterText {
+  color: hsla(var(--foreground), 0.9);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1.25rem;
+  margin-left: 0.25rem;
+  background-color: hsl(var(--primary));
+  transition: opacity 0.2s;
+}
+
+@media (min-width: 768px) {
+  .cursor {
+    height: 1.5rem;
+  }
+}
+
+.cursorActive {
+  opacity: 1;
+}
+
+.cursorInactive {
+  opacity: 0;
+}
+
+/* Index Label */
+.indexLabelWrapper {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.indexLine {
+  height: 2px;
+  width: 4rem;
+  background-image: linear-gradient(to right, hsla(var(--primary), 0.6), transparent);
+}
+
+.indexLabel {
+  font-family: monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.8em;
+  color: hsla(var(--primary), 0.6);
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.scrollText {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scrollIconWrapper {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--primary));
+}
+
+/* Bottom Fade */
+.bottomFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  background-image: linear-gradient(to top, hsl(var(--background)), transparent);
+  pointer-events: none;
+}

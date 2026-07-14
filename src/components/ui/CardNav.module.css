@@ -1,0 +1,219 @@
+.relative {
+  position: relative;
+}
+
+.dockItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-decoration: none;
+}
+
+.tooltip {
+  position: absolute;
+  top: -3rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.tooltipArrow {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: hsl(var(--foreground));
+}
+
+.iconWrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.darkIcon {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dockItem:hover .darkIcon {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.lightIcon {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.dockItem:hover .lightIcon {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  filter: blur(24px);
+}
+
+.icon {
+  width: 40%;
+  height: 40%;
+  transition: transform 0.3s;
+}
+
+.dockItem:hover .icon {
+  transform: scale(1.1);
+}
+
+.darkIconText {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.lightIconText {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.btn {
+  position: relative;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all 0.3s;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.darkBtnActive {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.lightBtnActive {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.darkBtnInactive {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.darkBtnInactive:hover {
+  color: #ffffff;
+}
+
+.lightBtnInactive {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.lightBtnInactive:hover {
+  color: #000000;
+}
+
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 9999px;
+}
+
+.btn:hover .hoverOverlay {
+  opacity: 1;
+}
+
+.labelFlex {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dotWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.greenDot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: #D1FF4D;
+  box-shadow: 0 0 8px rgba(209, 255, 77, 0.6);
+}
+
+.z10 {
+  position: relative;
+  z-index: 10;
+}
+
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.5;
+}
+
+.dockListWrapper {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 0.5rem;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.dockList {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-radius: 2.5rem;
+  border: 1px solid transparent;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  backdrop-filter: blur(64px);
+  transition: all 0.5s;
+  min-height: 100px;
+}
+
+.darkDock {
+  background-color: rgba(10, 10, 10, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+.lightDock {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+}

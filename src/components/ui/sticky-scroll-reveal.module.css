@@ -1,0 +1,248 @@
+.container {
+  position: relative;
+}
+
+.scrollArea {
+  position: relative;
+  display: flex;
+  height: 35rem;
+  justify-content: center;
+  overflow-y: scroll;
+  border-radius: 2.5rem;
+  padding: 1.5rem;
+  background-color: transparent;
+  transition: all 0.7s;
+}
+
+@media (min-width: 768px) {
+  .scrollArea {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scrollArea {
+    justify-content: space-between;
+  }
+  .scrollArea > * + * {
+    margin-left: 2.5rem;
+  }
+}
+
+.leftColumn {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .leftColumn {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .leftColumn {
+    width: 60%;
+  }
+}
+
+.timelineTrack {
+  position: absolute;
+  left: 0;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  width: 1px;
+  background-image: linear-gradient(to bottom, transparent, hsla(var(--primary), 0.2), transparent);
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .timelineTrack {
+    display: block;
+  }
+}
+
+.timelineThumb {
+  width: 0.25rem;
+  height: 2rem;
+  margin-left: -1.5px;
+  border-radius: 9999px;
+  background-color: hsl(var(--primary));
+  box-shadow: 0 0 15px hsla(var(--primary), 0.5);
+}
+
+.contentWrapper {
+  max-width: 42rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .contentWrapper {
+    padding-left: 2rem;
+  }
+}
+
+.itemBlock {
+  min-height: 25rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.itemBlock:first-child {
+  padding-top: 0;
+}
+
+.itemBlock:last-child {
+  padding-bottom: 2rem;
+}
+
+.labelGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.labelLine {
+  width: 1rem;
+  height: 1px;
+  background-color: hsla(var(--primary), 0.4);
+}
+
+.labelText {
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: hsl(var(--primary));
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: hsl(var(--foreground));
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-style: italic;
+  overflow: visible;
+  line-height: 0.85;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+.descriptionWrapper {
+  margin-top: 2rem;
+  position: relative;
+}
+
+.quoteBar {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: hsla(var(--primary), 0.1);
+  border-radius: 9999px;
+}
+
+.description {
+  font-size: 1rem;
+  max-width: 24rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  font-weight: 500;
+  padding-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .description {
+    font-size: 1.125rem;
+  }
+}
+
+.mobileContent {
+  margin-top: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: hsla(var(--card), 0.4);
+  border: 1px solid hsla(var(--border), 0.4);
+  padding: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .mobileContent {
+    display: none;
+  }
+}
+
+.rightColumn {
+  position: sticky;
+  top: 0;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+@media (min-width: 1024px) {
+  .rightColumn {
+    display: flex;
+  }
+}
+
+.stickyContent {
+  height: 24rem;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2.5rem;
+  background-color: hsla(var(--card), 0.4);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.7s;
+}
+
+:global(.dark) .stickyContent {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.stickyContent:hover {
+  transform: scale(1.02);
+}
+
+.stickyInner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.indicatorBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image: radial-gradient(circle at center, hsl(var(--primary)) 0%, transparent 70%);
+  filter: blur(64px);
+  z-index: -10;
+}

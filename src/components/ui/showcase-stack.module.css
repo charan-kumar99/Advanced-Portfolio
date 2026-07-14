@@ -1,0 +1,19 @@
+.cardContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+
+.motionCard {
+  position: relative;
+  width: 100%;
+  transform-origin: top;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}

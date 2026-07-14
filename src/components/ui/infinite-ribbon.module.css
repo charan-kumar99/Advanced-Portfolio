@@ -1,0 +1,71 @@
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0.9;
+  width: 200vw;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.inner {
+  display: flex;
+  white-space: nowrap;
+  gap: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+
+.bgPrimary {
+  background-color: hsl(var(--primary));
+}
+
+.textPrimaryForeground {
+  color: hsl(var(--primary-foreground));
+}
+
+.animateMarquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animateMarqueeReverse {
+  animation: marquee-reverse 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}

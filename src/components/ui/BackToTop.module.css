@@ -1,0 +1,53 @@
+.wrapper {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.button {
+  position: relative;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.button:hover .icon {
+  transform: translateY(-0.25rem) scale(1.1);
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: hsla(var(--foreground), 0.1);
+  filter: blur(20px);
+  z-index: -10;
+  transition: all 0.3s;
+}
+
+.button:hover .glow {
+  filter: blur(24px);
+}

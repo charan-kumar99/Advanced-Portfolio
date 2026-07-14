@@ -1,0 +1,201 @@
+.section {
+  position: relative;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.ribbonsWrapper {
+  position: relative;
+  display: flex;
+  height: 300px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  margin-bottom: 2.5rem;
+}
+
+.ribbon1 {
+  z-index: 10;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-top: 1px solid #bfdbfe;
+  border-bottom: 1px solid #bfdbfe;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+:global(.dark) .ribbon1 {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.ribbon2 {
+  z-index: 20;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+:global(.dark) .ribbon2 {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.content {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 10;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 3rem;
+  color: hsl(var(--foreground));
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+.wordGrid {
+  display: inline-grid;
+  place-items: center;
+}
+
+.textGradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(135deg, #1a1a1a, #404040, #171717);
+  background-size: 200% 200%;
+  animation: gradient-flow 6s ease infinite;
+}
+
+:global(.dark) .textGradient {
+  background-image: linear-gradient(135deg, #fafafa, #d4d4d4, #a3a3a3);
+}
+
+.invisibleWord {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  visibility: hidden;
+  pointer-events: none;
+  composes: textGradient;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.visibleWord {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  display: inline-block;
+  composes: textGradient;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4rem;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .buttonGroup {
+    flex-direction: row;
+  }
+}
+
+/* Button styles matching global.css rules */
+.btnBase {
+  position: relative;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btnCreative {
+  composes: btnBase;
+  background: linear-gradient(135deg, #171717, #404040);
+  color: #fff;
+}
+
+:global(.dark) .btnCreative {
+  background: linear-gradient(135deg, #fff, #a3a3a3);
+  color: #000;
+}
+
+.btnOutlineCreative {
+  composes: btnBase;
+  background-color: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  color: hsl(var(--foreground));
+}
+
+:global(.dark) .btnOutlineCreative {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btnOutlineCreative:hover {
+  background-color: hsla(var(--foreground), 0.05);
+}

@@ -1,0 +1,48 @@
+.section {
+  position: relative;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: hsl(var(--background));
+}
+
+.gridPatternLight {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
+
+:global(.dark) .gridPatternLight {
+  opacity: 0.04;
+}
+
+.gridPatternDark {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+}
+
+:global(.dark) .gridPatternDark {
+  opacity: 0.04;
+}
+
+.gridContainer {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.shortcutsWrapper {
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}

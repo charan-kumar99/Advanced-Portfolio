@@ -1,0 +1,48 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(var(--background));
+  overflow: hidden;
+}
+
+.gradient {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, hsla(var(--primary), 0.05), transparent);
+  opacity: 0.2;
+}
+
+.centerBox {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow {
+  width: 16rem;
+  height: 16rem;
+  background-color: hsla(var(--primary), 0.1);
+  filter: blur(100px);
+  border-radius: 9999px;
+  animation: pulseSlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+.innerViewer {
+  width: 100%;
+  height: 100%;
+  padding-top: 5rem;
+}

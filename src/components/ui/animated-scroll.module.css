@@ -1,0 +1,469 @@
+.container {
+  position: relative;
+  height: 400vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+.stickyWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+  pointer-events: auto;
+  transform-origin: center;
+}
+
+:global(.dark) .stickyWrapper {
+  background-color: #000000;
+}
+
+.slideViewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+}
+
+:global(.dark) .slideViewport {
+  background-color: #000000;
+}
+
+.leftColumn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: visible;
+  background-color: hsl(var(--background));
+}
+
+:global(.dark) .leftColumn {
+  background-color: #000000;
+}
+
+.rightColumn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: visible;
+  background-color: hsl(var(--background));
+}
+
+:global(.dark) .rightColumn {
+  background-color: #000000;
+}
+
+.lineLeft {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 2px;
+  height: 100%;
+  background-color: hsl(var(--background));
+  z-index: 50;
+  pointer-events: none;
+}
+
+:global(.dark) .lineLeft {
+  background-color: #000000;
+}
+
+.lineRight {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 2px;
+  height: 100%;
+  background-color: hsl(var(--background));
+  z-index: 50;
+  pointer-events: none;
+}
+
+:global(.dark) .lineRight {
+  background-color: #000000;
+}
+
+.gradientTop {
+  position: absolute;
+  top: -10vh;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background-image: linear-gradient(to top, hsl(var(--background)), transparent);
+  z-index: 50;
+  pointer-events: none;
+}
+
+:global(.dark) .gradientTop {
+  background-image: linear-gradient(to top, #000000, transparent);
+}
+
+.gradientBottom {
+  position: absolute;
+  bottom: -10vh;
+  left: 0;
+  width: 100%;
+  height: 10vh;
+  background-image: linear-gradient(to bottom, hsl(var(--background)), transparent);
+  z-index: 50;
+  pointer-events: none;
+}
+
+:global(.dark) .gradientBottom {
+  background-image: linear-gradient(to bottom, #000000, transparent);
+}
+
+.innerViewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.editorialBlock {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 3rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .editorialBlock {
+    padding: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorialBlock {
+    padding: 8rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .editorialBlock {
+    padding: 10rem;
+  }
+}
+
+.hoverBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.editorialContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 3rem;
+  max-width: 42rem;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.headlineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rowFeatureLabel {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.featureTag {
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 900;
+  letter-spacing: 0.5em;
+  color: hsl(var(--primary));
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.featureDivider {
+  height: 1px;
+  width: 3rem;
+  background-color: hsla(var(--primary), 0.2);
+}
+
+.editorialHeading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 1.25;
+  color: hsl(var(--foreground));
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .editorialHeading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorialHeading {
+    font-size: 3.75rem;
+  }
+}
+
+.editorialDesc {
+  font-size: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+  line-height: 1.25;
+  max-width: 32rem;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .editorialDesc {
+    font-size: 1.5rem;
+  }
+}
+
+.skillsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+.badgeWrapper {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  pointer-events: auto;
+}
+
+.badge {
+  position: relative;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsla(var(--foreground), 0.4);
+  border: 1px solid hsla(var(--foreground), 0.1);
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  background-color: hsla(var(--foreground), 0.02);
+  backdrop-filter: blur(24px);
+  transition: border-color 0.3s;
+}
+
+@media (min-width: 768px) {
+  .badge {
+    font-size: 11px;
+  }
+}
+
+.badge:hover {
+  border-color: transparent;
+}
+
+.badgeFill {
+  position: absolute;
+  inset: 0;
+  transform: translateY(101%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.badge:hover .badgeFill {
+  transform: translateY(0);
+}
+
+.badgeText {
+  position: relative;
+  z-index: 10;
+  transition: color 0.3s;
+}
+
+.bridgeContainer {
+  position: absolute;
+  inset: 0;
+  background-color: hsl(var(--background));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+:global(.dark) .bridgeContainer {
+  background-color: #000000;
+}
+
+.bridgeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.bridgeHeading {
+  font-size: 2.25rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: hsl(var(--foreground));
+  line-height: 1.1;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+}
+
+:global(.dark) .bridgeHeading {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .bridgeHeading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bridgeHeading {
+    font-size: 4.5rem;
+  }
+}
+
+.scrollHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  opacity: 0.3;
+  padding-top: 2.5rem;
+}
+
+.hintLabel {
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+
+:global(.dark) .hintLabel {
+  color: #ffffff;
+}
+
+.hintIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: hsl(var(--foreground));
+}
+
+:global(.dark) .hintIcon {
+  color: #ffffff;
+}
+
+.visualContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: hsl(var(--background));
+}
+
+:global(.dark) .visualContainer {
+  background-color: #000000;
+}
+
+.visualImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.visualOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.overlayLeft {
+  background-image: linear-gradient(to right, transparent, transparent, hsl(var(--background)));
+}
+
+:global(.dark) .overlayLeft {
+  background-image: linear-gradient(to right, transparent, transparent, #000000);
+}
+
+.overlayRight {
+  background-image: linear-gradient(to left, transparent, transparent, hsl(var(--background)));
+}
+
+:global(.dark) .overlayRight {
+  background-image: linear-gradient(to left, transparent, transparent, #000000);
+}
+
+.visualOverlayDual {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, hsl(var(--background)), transparent, hsl(var(--background)));
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 10;
+}
+
+:global(.dark) .visualOverlayDual {
+  background-image: linear-gradient(to bottom, #000000, transparent, #000000);
+}
+
+.visualOverlayTop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 12rem;
+  background-image: linear-gradient(to bottom, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 20;
+}
+
+:global(.dark) .visualOverlayTop {
+  background-image: linear-gradient(to bottom, #000000, transparent);
+}
+
+.visualOverlayBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12rem;
+  background-image: linear-gradient(to top, hsl(var(--background)), transparent);
+  pointer-events: none;
+  z-index: 20;
+}
+
+:global(.dark) .visualOverlayBottom {
+  background-image: linear-gradient(to top, #000000, transparent);
+}

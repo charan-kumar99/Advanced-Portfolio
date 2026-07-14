@@ -1,0 +1,98 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Variants */
+.variantDefault {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.variantDefault:hover {
+  background-color: hsla(var(--primary), 0.9);
+}
+
+.variantDestructive {
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+.variantDestructive:hover {
+  background-color: hsla(var(--destructive), 0.9);
+}
+
+.variantOutline {
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+.variantOutline:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.variantSecondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+.variantSecondary:hover {
+  background-color: hsla(var(--secondary), 0.8);
+}
+
+.variantGhost {
+  background: transparent;
+  color: hsl(var(--foreground));
+}
+.variantGhost:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.variantLink {
+  background: transparent;
+  color: hsl(var(--primary));
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+}
+.variantLink:hover {
+  text-decoration-line: underline;
+}
+
+/* Sizes */
+.sizeDefault {
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+.sizeSm {
+  height: 2.25rem;
+  border-radius: 0.375rem;
+  padding: 0 0.75rem;
+}
+.sizeLg {
+  height: 2.75rem;
+  border-radius: 0.375rem;
+  padding: 0 2rem;
+}
+.sizeIcon {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0;
+}
