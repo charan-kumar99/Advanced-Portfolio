@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useMotionValueEvent, useSpring, useMot
 import { cn } from "@/lib/utils";
 import { ChevronDown } from 'lucide-react';
 import styles from './animated-scroll.module.css';
+import Loader from './Loader';
 
 const pages = [
     {
@@ -20,7 +21,8 @@ const pages = [
     },
     {
         leftBgImage: null,
-        rightBgImage: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2000&auto=format&fit=crop',
+        rightBgImage: null,
+        rightComponent: <Loader type="software" />,
         leftContent: {
             heading: 'Scalable Architecture',
             description: 'Building the foundation for resilient digital ecosystems. I engineer scalable backends with a focus on microservices, global API design, and seamless deployments utilizing Docker and Azure DevOps.',
@@ -30,7 +32,7 @@ const pages = [
         rightContent: null,
     },
     {
-        leftBgImage: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2000&auto=format&fit=crop',
+        leftBgImage: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2000&auto=format&fit=crop',
         rightBgImage: null,
         leftContent: null,
         rightContent: {
@@ -114,8 +116,8 @@ export default function ScrollAdventure() {
 }
 
 function PageSlide({ page, isActive, scrollProgress, index }) {
-    const leftIsImage = !!page.leftBgImage;
-    const rightIsImage = !!page.rightBgImage;
+    const leftHasVisual = !!page.leftBgImage || !!page.leftComponent;
+    const rightHasVisual = !!page.rightBgImage || !!page.rightComponent;
 
     const totalPages = pages.length;
     const step = 1 / totalPages;
@@ -137,13 +139,13 @@ function PageSlide({ page, isActive, scrollProgress, index }) {
     const leftY = useTransform(
         scrollProgress,
         [enterStart, enterEnd, exitStart, exitEnd],
-        [leftIsImage ? "-100%" : "100%", "0%", "0%", leftIsImage ? "-100%" : "100%"]
+        [leftHasVisual ? "-100%" : "100%", "0%", "0%", leftHasVisual ? "-100%" : "100%"]
     );
 
     const rightY = useTransform(
         scrollProgress,
         [enterStart, enterEnd, exitStart, exitEnd],
-        [rightIsImage ? "-100%" : "100%", "0%", "0%", rightIsImage ? "-100%" : "100%"]
+        [rightHasVisual ? "-100%" : "100%", "0%", "0%", rightHasVisual ? "-100%" : "100%"]
     );
 
     const zIndex = useTransform(
@@ -163,7 +165,9 @@ function PageSlide({ page, isActive, scrollProgress, index }) {
                 <div className={styles.gradientBottom} />
 
                 <div className={styles.innerViewport}>
-                  {page.leftBgImage ? (
+                  {page.leftComponent ? (
+                      <BlendedVisual component={page.leftComponent} side="left" />
+                  ) : page.leftBgImage ? (
                       <BlendedVisual src={page.leftBgImage} side="left" />
                   ) : (
                       <div className={cn(styles.editorialBlock, "group")}>
@@ -188,7 +192,9 @@ function PageSlide({ page, isActive, scrollProgress, index }) {
                 <div className={styles.gradientBottom} />
 
                 <div className={styles.innerViewport}>
-                  {page.rightBgImage ? (
+                  {page.rightComponent ? (
+                      <BlendedVisual component={page.rightComponent} side="right" />
+                  ) : page.rightBgImage ? (
                       <BlendedVisual src={page.rightBgImage} side="right" />
                   ) : (
                       <div className={cn(styles.editorialBlock, "group")}>
@@ -240,18 +246,28 @@ function BridgeSlide({ page, isActive, scrollProgress, index }) {
     );
 }
 
-function BlendedVisual({ src, side }) {
+function BlendedVisual({ src, component, side }) {
     const edgeClass = side === 'left' ? styles.overlayLeft : styles.overlayRight;
 
     return (
         <div className={styles.visualContainer}>
-            <motion.div
-                initial={{ scale: 1, filter: "grayscale(100%)" }}
-                whileHover={{ scale: 1.05, filter: "grayscale(0%)" }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className={styles.visualImage}
-                style={{ backgroundImage: `url(${src})` }}
-            />
+            {src ? (
+                <motion.div
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    className={styles.visualImage}
+                    style={{ backgroundImage: `url(${src})` }}
+                />
+            ) : component ? (
+                <motion.div
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                    <div className="w-full h-full transform scale-[1.8] md:scale-[2.0]">
+                        {component}
+                    </div>
+                </motion.div>
+            ) : null}
             <div className={cn(styles.visualOverlay, edgeClass)} />
             <div className={styles.visualOverlayDual} />
             <div className={styles.visualOverlayTop} />
@@ -295,14 +311,14 @@ function MagneticTag({ text, index }) {
     const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.1 });
 
     const colors = [
-        { main: "bg-emerald-500", textHover: "group-hover/badge:text-white" },
-        { main: "bg-blue-500", textHover: "group-hover/badge:text-white" },
-        { main: "bg-violet-500", textHover: "group-hover/badge:text-white" },
-        { main: "bg-rose-500", textHover: "group-hover/badge:text-white" },
-        { main: "bg-amber-500", textHover: "group-hover/badge:text-black" },
-        { main: "bg-cyan-500", textHover: "group-hover/badge:text-black" }
+        "bg-emerald-500 hover:text-white",
+        "bg-blue-500 hover:text-white",
+        "bg-violet-500 hover:text-white",
+        "bg-rose-500 hover:text-white",
+        "bg-amber-500 hover:text-black",
+        "bg-cyan-500 hover:text-black"
     ];
-    const color = colors[index % colors.length];
+    const colorClass = colors[index % colors.length];
 
     const handleMouseMove = (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -325,10 +341,9 @@ function MagneticTag({ text, index }) {
         >
             <motion.div
                 style={{ x: springX, y: springY }}
-                className={cn(styles.badge, "group/badge")}
+                className={cn(styles.badge, colorClass)}
             >
-                <div className={cn(styles.badgeFill, color.main)} />
-                <span className={cn(styles.badgeText, color.textHover)}>{text}</span>
+                <span>{text}</span>
             </motion.div>
         </div>
     );

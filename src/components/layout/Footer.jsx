@@ -18,7 +18,8 @@ import {
     X,
     Gamepad2,
     Music,
-    Bot
+    Bot,
+    Focus
 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { portfolioData } from '@/data/portfolio';
@@ -208,6 +209,19 @@ export function Footer() {
                                             </motion.a>
                                         );
                                     })}
+                                    {/* Bento Page Button */}
+                                    <motion.a
+                                        href="/bento"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.socialIconLink}
+                                        aria-label="Bento"
+                                        title="Bento Page"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        <Focus className="w-4 h-4" />
+                                    </motion.a>
 
                                     {/* Dedicated AI Chat Assistant Button */}
                                     <motion.button

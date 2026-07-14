@@ -15,7 +15,7 @@ import { Meteors } from '@/components/ui/meteors';
 import dynamic from 'next/dynamic';
 
 const ProjectContact = dynamic(() => import('@/components/sections/ProjectContact').then(mod => mod.ProjectContact), { ssr: true });
-const ProjectStats = dynamic(() => import('@/components/sections/ProjectStats').then(mod => mod.ProjectStats), { ssr: true });
+const ProjectStats = dynamic(() => import('@/components/sections/ProjectStats').then(mod => mod.default), { ssr: true });
 
 import { usePerformance } from '@/hooks/usePerformance';
 import { ProjectPlaceholder } from '@/components/projects/ProjectPlaceholder';

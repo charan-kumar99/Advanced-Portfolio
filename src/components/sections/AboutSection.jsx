@@ -8,13 +8,13 @@ import { useTheme } from "next-themes";
 import ImageTrail from "@/components/ImageTrail";
 import Image from "next/image";
 import { portfolioData } from "@/data/portfolio";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import Testimonial1 from "@/components/ui/testimonial-1";
 import { IdentitySequence } from "./IdentitySequence";
 import ScrollAdventure from "@/components/ui/animated-scroll";
 import { ArgentLoopInfiniteSlider } from "@/components/ui/argent-loop-infinite-slider";
-import TeamShowcase from "@/components/ui/team-showcase";
+import { HorizontalTimeline } from "@/components/ui/horizontal-timeline";
 import { CertificateShowcase } from "@/components/ui/certificate-marquee";
 import { GitHubShowcase } from "@/components/ui/github-showcase";
 import { ShowcaseStack } from "@/components/ui/showcase-stack";
@@ -423,27 +423,59 @@ export default function AboutSection() {
                     <ScrollAdventure />
                     <ArgentLoopInfiniteSlider />
                     
-                    <div className={styles.solidBgSection}>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
-                            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                            className={styles.showcaseInner}
-                        >
-                            <div className={styles.showcaseHeader}>
-                                <h3 className={styles.showcaseTitle}>
-                                    View My Related Experience
-                                </h3>
-                                <p className={styles.showcaseTag}>
-                                    Professional Background
-                                </p>
+                    <HorizontalTimeline data={showcaseMembers.map((member) => ({
+                        title: member.id === 'view-more' ? 'Explore all experiences' : (member.role || member.name),
+                        isEnd: member.id === 'view-more',
+                        period: member.period,
+                        content: member.id === 'view-more' ? (
+                            <div className="relative flex items-center h-[140px] w-[250px] z-30 group">
+                                <Link
+                                    href={member.social?.website || '/experience'}
+                                    className="flex items-center gap-4 cursor-pointer"
+                                >
+                                    <div className="p-4 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(var(--primary),0.3)]">
+                                        <ArrowUpRight className="w-8 h-8 text-neutral-600 dark:text-neutral-400 transition-all duration-500 group-hover:text-primary-foreground group-hover:rotate-45 group-hover:scale-110" />
+                                    </div>
+                                    <span className="text-lg md:text-xl font-bold text-neutral-900 dark:text-white opacity-0 -translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap drop-shadow-sm">
+                                        View more
+                                    </span>
+                                </Link>
                             </div>
-                            <div className={styles.fullWidth}>
-                                <TeamShowcase members={showcaseMembers} />
-                            </div>
-                        </motion.div>
+                        ) : (
+                            <div className="flex flex-col gap-4 w-[320px] md:w-[400px] border border-neutral-200 dark:border-neutral-800 p-6 rounded-2xl bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-xl mt-4">
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex flex-row items-center justify-between">
+                                        <h4 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">
+                                            {member.name}
+                                        </h4>
+                                    </div>
+                                </div>
 
+                                {member.description && (
+                                    <p className="text-sm font-normal text-neutral-600 dark:text-neutral-400 leading-relaxed mt-1 line-clamp-3" title={member.description}>
+                                        {member.description}
+                                    </p>
+                                )}
+
+                                <div className="w-full mt-4 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden relative group/card h-32">
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="w-full h-full object-cover opacity-90 group-hover/card:opacity-100 transition-opacity duration-500 group-hover/card:scale-105"
+                                    />
+                                    {member.social?.website && (
+                                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                                            <Link href={member.social.website} target="_blank" className="px-5 py-2.5 bg-white text-black text-xs font-bold rounded-full hover:scale-105 transition-transform">
+                                                View Details
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )
+                    }))} />
+
+                    <div className={styles.solidBgSection}>
                         {/* Certificate Showcase Section */}
                         <div className={styles.showcaseStackSection}>
                             <CertificateShowcase />

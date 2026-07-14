@@ -23,7 +23,8 @@ import {
     Globe,
     Sun,
     Moon,
-    Bot
+    Bot,
+    Instagram
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
@@ -293,7 +294,7 @@ export default function BentoPage() {
                     </Link>
                     <div className="w-px h-5 bg-zinc-300 dark:bg-zinc-800 mx-1" />
                     {personal.socialLinks.map((link) => {
-                        const Icon = link.platform === 'LinkedIn' ? Linkedin : link.platform === 'GitHub' ? Github : Globe;
+                        const Icon = link.platform === 'LinkedIn' ? Linkedin : link.platform === 'GitHub' ? Github : link.platform === 'Instagram' ? Instagram : Globe;
                         return (
                             <Link key={link.platform} href={link.url} target="_blank" className="p-2.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white" title={link.platform}>
                                 <Icon className="w-4 h-4" />

@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { SiGithub, SiInstagram } from 'react-icons/si';
-import { FaLinkedin } from 'react-icons/fa6';
-import { Mail, ArrowUpRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '@/data/portfolio';
+import { InteractiveRobotSpline } from '@/components/ui/interactive-3d-robot';
 import styles from './ProjectContact.module.css';
 
-// --- MAIN WRAPPER COMPONENT ---
 export const ProjectContact = ({ isLowPowerMode }) => {
+    const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
+
     return (
         <section className={styles.section}>
 
@@ -36,23 +36,14 @@ export const ProjectContact = ({ isLowPowerMode }) => {
             </div>
 
             <div className={styles.cardContainer}>
-                <LogoRolodex
-                    isLowPowerMode={isLowPowerMode}
-                    items={[
-                        // GitHub - White/Black
-                        <LogoItem key={1} className="bg-zinc-900 dark:bg-white text-white dark:text-zinc-900">
-                            <SiGithub />
-                        </LogoItem>,
-                        // LinkedIn - Blue
-                        <LogoItem key={2} className="bg-blue-600 text-white">
-                            <FaLinkedin />
-                        </LogoItem>,
-                        // Instagram - Gradient-ish (Pink/Orange)
-                        <LogoItem key={4} className="bg-gradient-to-br from-purple-500 to-orange-500 text-white">
-                            <SiInstagram />
-                        </LogoItem>
-                    ]}
-                />
+                <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden flex items-center justify-center [mask-image:radial-gradient(circle_at_center,black_40%,transparent_75%)] md:[mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)]">
+                    <div className="absolute inset-0 scale-[1.15] md:scale-110">
+                        <InteractiveRobotSpline
+                            scene={ROBOT_SCENE_URL}
+                            className="w-full h-full"
+                        />
+                    </div>
+                </div>
             </div>
         </section>
     );
@@ -156,93 +147,6 @@ const Typewrite = ({ examples, isLowPowerMode }) => {
                     ))}
                 </div>
             </div>
-        </div>
-    );
-};
-
-
-// --- ORIGAMI LOGO ROLODEX ---
-const DELAY_IN_MS = 2500;
-const TRANSITION_DURATION_IN_SECS = 1.5;
-
-const LogoRolodex = ({ items, isLowPowerMode }) => {
-    const intervalRef = useRef(null);
-    const [index, setIndex] = useState(0);
-
-    useEffect(() => {
-        intervalRef.current = setInterval(() => {
-            setIndex((pv) => pv + 1);
-        }, isLowPowerMode ? DELAY_IN_MS * 1.5 : DELAY_IN_MS);
-
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [isLowPowerMode]);
-
-    return (
-        <div
-            style={{
-                transformStyle: "preserve-3d",
-            }}
-            className={styles.rolodexWrapper}
-        >
-            <AnimatePresence mode="sync">
-                <motion.div
-                    style={{
-                        y: "-50%",
-                        x: "-50%",
-                        clipPath: isLowPowerMode ? "none" : "polygon(0 0, 100% 0, 100% 50%, 0 50%)",
-                        zIndex: -index,
-                        backfaceVisibility: "hidden",
-                    }}
-                    key={index}
-                    transition={{
-                        duration: isLowPowerMode ? 0.5 : TRANSITION_DURATION_IN_SECS,
-                        ease: "easeInOut",
-                    }}
-                    initial={isLowPowerMode ? { opacity: 0 } : { rotateX: "0deg" }}
-                    animate={isLowPowerMode ? { opacity: 1 } : { rotateX: "0deg" }}
-                    exit={isLowPowerMode ? { opacity: 0 } : { rotateX: "-180deg" }}
-                    className="absolute left-1/2 top-1/2"
-                >
-                    {items[index % items.length]}
-                </motion.div>
-                {!isLowPowerMode && (
-                    <motion.div
-                        style={{
-                            y: "-50%",
-                            x: "-50%",
-                            clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0 100%)",
-                            zIndex: index,
-                            backfaceVisibility: "hidden",
-                        }}
-                        key={(index + 1) * 2}
-                        initial={{ rotateX: "180deg" }}
-                        animate={{ rotateX: "0deg" }}
-                        exit={{ rotateX: "0deg" }}
-                        transition={{
-                            duration: TRANSITION_DURATION_IN_SECS,
-                            ease: "easeInOut",
-                        }}
-                        className="absolute left-1/2 top-1/2"
-                    >
-                        {items[index % items.length]}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-};
-
-const LogoItem = ({
-    children,
-    className,
-}) => {
-    return (
-        <div
-            className={`${styles.logoItem} ${className || ''}`}
-        >
-            {children}
         </div>
     );
 };
