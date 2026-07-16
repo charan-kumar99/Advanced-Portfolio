@@ -1,5 +1,6 @@
 'use client';
 
+// Test comment for testing branch changes
 import { useRef, useState, useEffect } from "react";
 import { usePerformance } from "@/hooks/usePerformance";
 import { cn } from "@/lib/utils";
