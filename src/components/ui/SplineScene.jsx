@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from "react";
 import { usePerformance } from "@/hooks/usePerformance";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
 import styles from './SplineScene.module.css';
 
 export const SplineScene = ({ scene, className }) => {
@@ -11,20 +10,11 @@ export const SplineScene = ({ scene, className }) => {
     const isMounted = useRef(true);
     const { isLowPowerMode } = usePerformance();
     const [isLoaded, setIsLoaded] = useState(false);
-    const [shouldStart, setShouldStart] = useState(false);
-
-    // Defer loading 3D scene by 1 second to avoid blocking main thread on page load
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShouldStart(true);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, []);
 
     useEffect(() => {
         isMounted.current = true;
 
-        if (isLowPowerMode || !shouldStart) return;
+        if (isLowPowerMode) return;
 
         const SCRIPT_ID = 'spline-viewer-script';
         let script = document.getElementById(SCRIPT_ID);
@@ -37,7 +27,7 @@ export const SplineScene = ({ scene, className }) => {
             script = document.createElement('script');
             script.id = SCRIPT_ID;
             script.type = 'module';
-            script.src = 'https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js';
+            script.src = '/spline-viewer.js'; // Load locally for instant response
             script.async = true;
             script.addEventListener('load', handleLoad);
             document.body.appendChild(script);
@@ -53,10 +43,10 @@ export const SplineScene = ({ scene, className }) => {
             isMounted.current = false;
             if (script) script.removeEventListener('load', handleLoad);
         };
-    }, [isLowPowerMode, shouldStart]);
+    }, [isLowPowerMode]);
 
     useEffect(() => {
-        if (isLowPowerMode || !shouldStart) return;
+        if (isLowPowerMode) return;
 
         let intervalId;
 
@@ -107,7 +97,7 @@ export const SplineScene = ({ scene, className }) => {
             if (currentRef) currentRef.removeEventListener('load', injectStyles);
             if (intervalId) clearInterval(intervalId);
         };
-    }, [isLowPowerMode, shouldStart]);
+    }, [isLowPowerMode]);
 
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -167,22 +157,20 @@ export const SplineScene = ({ scene, className }) => {
     return (
         <div ref={containerRef} className={cn(styles.container, className)}>
             <div className={styles.innerViewer}>
-                {shouldStart && (
-                    <spline-viewer
-                        ref={splineRef}
-                        url={scene}
-                        loading-anim-type="spinner-small-dark"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            transform: 'scale(1.2) translate3d(0,0,0)',
-                            transformOrigin: 'center center',
-                            display: isLoaded ? 'block' : 'none',
-                            opacity: isLoaded ? 1 : 0,
-                            transition: 'opacity 0.8s ease-in-out'
-                        }}
-                    />
-                )}
+                <spline-viewer
+                    ref={splineRef}
+                    url={scene}
+                    loading-anim-type="spinner-small-dark"
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        transform: 'scale(1.2) translate3d(0,0,0)',
+                        transformOrigin: 'center center',
+                        display: isLoaded ? 'block' : 'none',
+                        opacity: isLoaded ? 1 : 0,
+                        transition: 'opacity 0.8s ease-in-out'
+                    }}
+                />
             </div>
         </div>
     );
