@@ -27,7 +27,8 @@ export const SplineScene = ({ scene, className }) => {
             script = document.createElement('script');
             script.id = SCRIPT_ID;
             script.type = 'module';
-            script.src = '/spline-viewer.js'; // Load locally for instant response
+            // Pin version to match dependencies and leverage fast CDN caching with jsDelivr
+            script.src = 'https://cdn.jsdelivr.net/npm/@splinetool/viewer@1.12.47/build/spline-viewer.js';
             script.async = true;
             script.addEventListener('load', handleLoad);
             document.body.appendChild(script);
