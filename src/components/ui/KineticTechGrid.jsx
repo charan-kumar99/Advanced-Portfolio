@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { usePerformance } from '@/hooks/usePerformance';
-import { cn } from '@/lib/utils';
-import styles from './KineticTechGrid.module.css';
 
 const techDescriptions = {
     'Python': 'High-performance AI modeling and automation.',
@@ -26,10 +24,7 @@ const techDescriptions = {
     'LangChain': 'Large language model application orchestration.',
     'PyTorch': 'Dynamic neural networks for research and production.',
     'OpenCV': 'Real-time computer vision capabilities.',
-    '.NET Core': 'High-performance cross-platform backend framework.',
     'C#': 'Type-safe object-oriented enterprise programming.',
-    'SQL Server': 'Enterprise-grade relational database management.',
-    'HTML5': 'Semantic and accessible web structuring.',
     'Java': 'Robust, platform-independent enterprise development.',
     'C': 'Low-level performance and systems programming.',
     'CSS3': 'Advanced styling, animations, and responsive layouts.',
@@ -42,6 +37,8 @@ const techDescriptions = {
     'MySQL': 'Reliable, scalable open-source relational database.',
     'Oracle Database': 'Enterprise-grade, secure, and scalable data management.',
     'SQLite': 'Lightweight, embedded relational database engine.',
+    'SQL Server': 'Enterprise-grade relational database management.',
+    'HTML5': 'Semantic and accessible web structuring.',
 };
 
 export const KineticTechGrid = ({ items, className }) => {
@@ -50,7 +47,7 @@ export const KineticTechGrid = ({ items, className }) => {
 
     return (
         <div ref={containerRef} className={className}>
-            <div className={styles.grid}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative">
                 {items.map((tech, idx) => (
                     <TechCard
                         key={`${tech.name}-${idx}`}
@@ -81,28 +78,28 @@ const TechCard = ({ tech, idx, isLowPowerMode }) => {
                 zIndex: 10,
                 transition: { type: 'spring', stiffness: 400, damping: 30 }
             }}
-            className={styles.card}
+            className="group relative rounded-[20px] bg-white dark:bg-card border border-gray-100 dark:border-border/50 flex flex-row items-center gap-4 p-3 transition-all hover:border-gray-200 dark:hover:border-primary/50 hover:shadow-lg dark:hover:bg-muted/55 shadow-sm"
         >
-            <div className={styles.glow} />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[20px]" />
 
-            <div className={styles.iconContainer}>
-                <div className={styles.iconRelative}>
+            <div className="w-[60px] h-[60px] rounded-[14px] flex-shrink-0 flex items-center justify-center bg-gray-50 dark:bg-background relative overflow-hidden transition-all group-hover:bg-white dark:group-hover:bg-background/80 shadow-inner group-hover:shadow-md">
+                <div className="w-8 h-8 relative">
                     <Image
                         src={tech.icon}
                         alt={tech.name}
                         fill
-                        className={styles.img}
+                        className="object-contain grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300 unoptimized"
                         unoptimized
                         loading="lazy"
                     />
                 </div>
             </div>
 
-            <div className={styles.textContainer}>
-                <span className={styles.name}>
+            <div className="flex flex-col flex-grow text-left justify-center pr-2 relative z-10 overflow-hidden">
+                <span className="text-[13px] sm:text-sm font-bold text-gray-900 dark:text-foreground group-hover:text-primary transition-colors truncate">
                     {tech.name}
                 </span>
-                <span className={styles.desc}>
+                <span className="text-[11px] sm:text-xs text-gray-500 dark:text-muted-foreground mt-[2px] leading-snug line-clamp-2">
                     {description}
                 </span>
             </div>
