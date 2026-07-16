@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './InnovativeExperienceHero.module.css';
+import { cn } from '@/lib/utils';
 
 const NODES_DATA = {
     education: [
@@ -32,45 +32,44 @@ export function InnovativeExperienceHero({ type, title, highlight, description }
     const [hoveredNode, setHoveredNode] = useState(null);
 
     return (
-        <section className={styles.section}>
-            <div className={styles.grid}>
+        <section className="relative w-full py-4 lg:py-6 overflow-visible bg-transparent transition-colors duration-500">
+            <div className="w-full mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 items-center h-full overflow-visible">
                 {/* Left Content Column */}
-                <div className={styles.leftCol}>
+                <div className="relative z-20 space-y-8 lg:-ml-28 lg:pr-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         viewport={{ once: true }}
-                        className={styles.contentInner}
+                        className="space-y-6"
                     >
-                        <h2 className={styles.title}>
+                        <h2 className="text-[clamp(2.5rem,8vw,4rem)] font-bold text-black dark:text-white tracking-tight leading-[1.1]">
                             {title}<br />{highlight}
                         </h2>
 
-                        <p className={styles.desc}>
+                        <p className="text-lg text-neutral-500 dark:text-neutral-400 max-w-4xl leading-relaxed">
                             {description}
                         </p>
 
-                        <div className={styles.btnWrapper}>
+                        <div className="pt-4">
                             <Link
                                 href="/resume"
-                                className={styles.btn}
+                                className="group flex items-center gap-2 w-fit px-6 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white font-bold text-sm transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700"
                             >
-                                <span>View resume</span> 
-                                <ArrowRight className={styles.arrow} />
+                                View resume <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
                     </motion.div>
                 </div>
 
                 {/* Right Orbital Column */}
-                <div className={styles.rightCol}>
+                <div className="relative w-full h-[300px] md:h-[450px] lg:h-[600px] flex items-center justify-center overflow-visible">
                     {/* Responsive Container for Orbit */}
-                    <div className={styles.orbitContainer}>
+                    <div className="relative w-[1000px] h-[600px] scale-[0.3] sm:scale-[0.4] md:scale-[0.5] lg:scale-[0.65] xl:scale-[0.75] transition-transform duration-500 origin-center shrink-0 overflow-visible">
                         {/* SVG Orbital Paths (Tilted Ellipses) */}
-                        <svg className={styles.svgPaths} viewBox="0 0 1000 600">
-                            <path d={OUTER_PATH} className={styles.path} />
-                            <path d={INNER_PATH} className={styles.path} />
+                        <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 1000 600">
+                            <path d={OUTER_PATH} className="stroke-neutral-400 dark:stroke-neutral-600 opacity-60 dark:opacity-40" fill="none" strokeWidth="1.5" strokeDasharray="6 8" />
+                            <path d={INNER_PATH} className="stroke-neutral-400 dark:stroke-neutral-600 opacity-60 dark:opacity-40" fill="none" strokeWidth="1.5" strokeDasharray="6 8" />
                         </svg>
 
                         {/* Nodes */}
@@ -105,13 +104,17 @@ function OrbitalNode({ node, isHovered, onHover, onLeave }) {
             }}
         >
             <div className="relative" onMouseEnter={onHover} onMouseLeave={onLeave}>
-                <div className={styles.nodeWrapper}>
+                <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
                     <button
                         onMouseEnter={onHover}
                         onMouseLeave={onLeave}
-                        className={isHovered ? styles.nodeBtnActive : styles.nodeBtn}
+                        className={cn(
+                            "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 pointer-events-auto",
+                            "bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white border border-neutral-200 dark:border-neutral-700 shadow-sm",
+                            isHovered && "scale-110 shadow-lg border-neutral-300 dark:border-neutral-600 bg-neutral-200 dark:bg-neutral-700"
+                        )}
                     >
-                        <Plus className={isHovered ? styles.plusIconRotated : styles.plusIcon} />
+                        <Plus className={cn("w-4 h-4 transition-transform duration-500", isHovered && "rotate-45")} />
                     </button>
 
                     {/* Detail Card (Image 4 Style) */}
@@ -121,28 +124,28 @@ function OrbitalNode({ node, isHovered, onHover, onLeave }) {
                                 initial={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
                                 animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
                                 exit={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
-                                className={styles.detailCardWrapper}
+                                className="absolute bottom-[calc(100%+12px)] left-1/2 z-50 pointer-events-none"
                             >
-                                <div className={styles.detailCard}>
+                                <div className="relative w-[320px] bg-neutral-950/95 dark:bg-neutral-50/95 backdrop-blur-xl rounded-2xl overflow-hidden shadow-2xl pt-2 px-4 pb-4 md:pt-3 md:px-5 md:pb-5 space-y-3 border border-white/10 dark:border-black/5">
                                     {/* Tail to node */}
-                                    <div className={styles.detailTail} />
-                                    <div className={styles.detailHeader}>
-                                        <h4 className={styles.detailTitle}>{node.label}</h4>
-                                        <p className={styles.detailDesc}>
+                                    <div className="absolute top-[calc(100%-8px)] left-1/2 -translate-x-1/2 w-4 h-4 bg-neutral-950/95 dark:bg-neutral-50/95 border-r border-b border-white/10 dark:border-black/5 rotate-45 -z-10" />
+                                    <div className="space-y-1">
+                                        <h4 className="text-neutral-100 dark:text-neutral-900 font-bold text-lg leading-tight">{node.label}</h4>
+                                        <p className="text-neutral-400 dark:text-neutral-500 text-sm leading-relaxed">
                                             {node.description}
                                         </p>
                                     </div>
 
                                     {/* Image Visualization Area */}
-                                    <div className={styles.detailImageArea}>
+                                    <div className="aspect-video relative rounded-xl bg-neutral-900/50 dark:bg-neutral-200/50 overflow-hidden border border-white/5 dark:border-black/5">
                                         {node.imageUrl ? (
-                                            <Image src={node.imageUrl} alt={node.label} fill className="object-cover" />
+                                            <Image src={node.imageUrl} alt={node.label} fill sizes="(max-width: 768px) 50px, 100px" className="object-cover" />
                                         ) : (
                                             <div className="absolute inset-0 flex items-center justify-center text-[10px] uppercase tracking-widest text-white/20 dark:text-black/20 font-mono">
                                                 Visualization Area
                                             </div>
                                         )}
-                                        <div className={styles.detailGradient} />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 dark:from-neutral-50/60 to-transparent" />
                                     </div>
                                 </div>
                             </motion.div>
@@ -151,8 +154,15 @@ function OrbitalNode({ node, isHovered, onHover, onLeave }) {
                 </div>
 
                 {/* The Label */}
-                <div className={isLeftSide ? styles.nodeLabelWrapperLeft : styles.nodeLabelWrapperRight}>
-                    <span className={isHovered ? styles.nodeLabelActive : styles.nodeLabel}>
+                <div className={cn(
+                    "absolute top-0 whitespace-nowrap transition-all duration-300 pointer-events-none",
+                    isLeftSide ? "right-6 pr-4 text-right" : "left-6 pl-4 text-left",
+                    "-translate-y-1/2"
+                )}>
+                    <span className={cn(
+                        "text-sm font-bold text-black dark:text-white transition-all duration-300",
+                        isHovered ? "opacity-100" : "opacity-70"
+                    )}>
                         {node.label}
                     </span>
                 </div>
