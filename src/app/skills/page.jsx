@@ -189,7 +189,7 @@ export default function SkillsPage() {
                     style={{ y: yHeroSpline, scale: scaleSpline, willChange: 'transform' }}
                 >
                     <SplineScene
-                        scene="https://prod.spline.design/qVnpleqGGhqRlQYK/scene.splinecode"
+                        scene="/scene.splinecode"
                         className="w-full h-full opacity-60 md:opacity-100"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background pointer-events-none" />
