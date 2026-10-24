@@ -14,8 +14,8 @@ const pages = [
         leftContent: null,
         rightContent: {
             heading: 'Enterprise Solutions',
-            description: 'Specializing in architecting robust enterprise systems and comprehensive full-stack applications. From designing scalable SQL schemas to engineering modern, interactive frontends using ASP.NET Core and React.',
-            skills: ["C# & .NET 8", "Full-Stack Dev", "Clean Architecture", "React & Blazor", "Entity Framework", "SQL Server"],
+            description: 'Specializing in architecting robust enterprise systems and comprehensive full-stack applications. From designing scalable SQL schemas to engineering modern, interactive frontends with Clean Architecture and React.',
+            skills: ["Clean Architecture", "Full-Stack Dev", "Docker", "React & Next.js", "Entity Framework", "SQL Server"],
             hoverColor: "bg-blue-600/10"
         },
     },

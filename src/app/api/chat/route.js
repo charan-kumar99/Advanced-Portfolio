@@ -62,7 +62,7 @@ ${expList || 'See portfolio for details.'}
 ${eduList || 'MCA from MIT Jaipur, BCA from Mangalore University.'}
 
 ## Technical Skills
-${skillList || '.NET Core, C#, Python, React, Microservices.'}
+${skillList || 'C#, Clean Architecture, React, Docker, Microservices, REST APIs, SQL Server.'}
 
 ## Soft Skills
 ${softSkillList || 'Leadership, Communication, Problem Solving.'}
@@ -186,6 +186,14 @@ export async function POST(req) {
         let reply;
         let provider;
 
+        // If neither key is configured in dev environment, return a helpful offline reply
+        if (!process.env.GROQ_API_KEY && !process.env.GEMINI_API_KEY) {
+            return NextResponse.json({
+                reply: "Hello! I am Charan Kumar's portfolio assistant. Charan is a Software Developer currently building scalable backend APIs at AGREMATE Private Limited, and previously worked on critical RTGS/NEFT banking microservices at NTSIPL / MyCard Consultancy. Feel free to browse his projects or reach out directly through the Contact page!",
+                provider: 'local-demo'
+            });
+        }
+
         try {
             reply = await callGroq(messages, systemPrompt);
             provider = 'groq';
@@ -195,17 +203,11 @@ export async function POST(req) {
                 reply = await callGemini(messages, systemPrompt);
                 provider = 'gemini';
             } catch (geminiError) {
-                console.error('[Chat] Gemini also failed:', geminiError);
-                return NextResponse.json(
-                    {
-                        error: 'Both AI providers are currently unavailable. Please try again later.',
-                        details: {
-                            groq: groqError instanceof Error ? groqError.message : String(groqError),
-                            gemini: geminiError instanceof Error ? geminiError.message : String(geminiError),
-                        },
-                    },
-                    { status: 503 }
-                );
+                console.warn('[Chat] Gemini also failed, using intelligent fallback.');
+                return NextResponse.json({
+                    reply: "Thank you for asking! Charan Kumar is a Software Developer specializing in Clean Architecture, enterprise web applications, and scalable backend systems. Feel free to explore his work or reach out through the contact form!",
+                    provider: 'fallback'
+                });
             }
         }
 

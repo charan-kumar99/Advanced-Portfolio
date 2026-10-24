@@ -204,14 +204,14 @@ export function HeroVisual({ isExiting }) {
                 className={styles.flexRowTitle}
                 translate="no"
               >
-                <span className="">.NET</span>
+                <span className="">SOFT</span>
                 <div ref={zapRef} className={styles.zapVisibleLg}>
                   <Zap className={styles.zapIcon} strokeWidth={1.5} />
                 </div>
                 <div ref={zapSmallRef} className={styles.zapHiddenLg}>
                   <Zap className={styles.zapIcon} strokeWidth={2} />
                 </div>
-                <span className="">CORE</span>
+                <span className="">WARE</span>
               </motion.h1>
             </div>
           </div>

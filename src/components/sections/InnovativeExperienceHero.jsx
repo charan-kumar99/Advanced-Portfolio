@@ -13,14 +13,14 @@ const NODES_DATA = {
         { label: 'Mangalore University', description: 'Bachelor of Computer Applications (BCA).', orbitIndex: 1, position: 0.7, imageUrl: "/logos/orbit_mangalore.png" }
     ],
     journey: [
-        { label: 'AGREMATE', description: 'Software Developer (.NET).', orbitIndex: 0, position: 0.15, imageUrl: "/logos/orbit_agremate.png" },
+        { label: 'AGREMATE', description: 'Software Developer.', orbitIndex: 0, position: 0.15, imageUrl: "/logos/orbit_agremate.png" },
         { label: 'MIT, Jaipur', description: 'MCA Student.', orbitIndex: 1, position: 0.45, imageUrl: "/logos/orbit_mit.png" },
-        { label: 'NTSIPL', description: '.NET Developer.', orbitIndex: 0, position: 0.75, imageUrl: "/logos/orbit_ntsipl.png" },
+        { label: 'NTSIPL', description: 'Trainee Engineer - DotNet.', orbitIndex: 0, position: 0.75, imageUrl: "/logos/orbit_ntsipl.png" },
         { label: 'Mangalore Univ', description: 'BCA Graduate.', orbitIndex: 1, position: 0.95, imageUrl: "/logos/orbit_mangalore.png" },
     ],
     experience: [
-        { label: 'AGREMATE', description: 'Software Developer (.NET) - Building scalable APIs.', orbitIndex: 0, position: 0.2, imageUrl: "/logos/orbit_agremate.png" },
-        { label: 'NTSIPL', description: 'Software Developer (.NET) - Microservices architecture.', orbitIndex: 1, position: 0.7, imageUrl: "/logos/orbit_ntsipl.png" },
+        { label: 'AGREMATE', description: 'Software Developer - Building scalable APIs.', orbitIndex: 0, position: 0.2, imageUrl: "/logos/orbit_agremate.png" },
+        { label: 'NTSIPL', description: 'Trainee Engineer - DotNet - Microservices architecture.', orbitIndex: 1, position: 0.7, imageUrl: "/logos/orbit_ntsipl.png" },
     ]
 };
 
