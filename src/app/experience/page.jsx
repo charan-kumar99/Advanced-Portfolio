@@ -38,7 +38,7 @@ const highlightContent = {
     education: {
         title: "Building the Future",
         highlight: "Through Knowledge",
-        description: "Every line of code starts with understanding. My academic journey at Telkom University shapes how I approach complex problems with systematic thinking."
+        description: "Every line of code starts with understanding. My academic journey at MIT Jaipur and Mangalore University shapes how I approach complex problems with systematic thinking."
     },
     journey: {
         title: "Crafting Experiences",

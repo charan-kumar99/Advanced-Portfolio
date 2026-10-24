@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { portfolioData } from '@/data/portfolio';
+import { Logo } from '@/components/ui/logo';
 import styles from './stack-feature-section.module.css';
 
 const iconConfigs = portfolioData.techStack.map((tech) => ({
@@ -40,7 +41,7 @@ export default function FeatureSection() {
             
             <div className={styles.centerCircle}>
               <div className={styles.centerSpin}>
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt=".NET Core" className={styles.centerIcon} />
+                <Logo className={styles.centerIcon} />
               </div>
             </div>
 

@@ -24,22 +24,22 @@ const showcaseMembers = [
     // 1. AGREMATE
     ...portfolioData.experiences.filter(exp => exp.id === 'prof-1').map(exp => ({
         id: exp.id,
-        name: exp.company,
+        name: exp.companyShort || exp.company,
         role: `${exp.position}${exp.location ? ` (${exp.location})` : ''}`,
         description: exp.description,
-        period: exp.startDate + " - Present",
+        period: "Jun 2026 - Present",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1964&auto=format&fit=crop", // Computer / code image
-        social: exp.externalLink ? { website: exp.externalLink } : undefined
+        social: exp.website ? { website: exp.website } : undefined
     })),
-    // 2. NTSIPL
+    // 2. NTSIPL / MyCard
     ...portfolioData.experiences.filter(exp => exp.id === 'prof-2').map(exp => ({
         id: exp.id,
-        name: exp.company,
+        name: exp.companyShort || exp.company,
         role: `${exp.position}${exp.location ? ` (${exp.location})` : ''}`,
         description: exp.description,
-        period: "Dec 2025 - Jun 2026",
+        period: "Sep 2025 - Jun 2026",
         image: "https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=1964&auto=format&fit=crop", // Software development image
-        social: exp.externalLink ? { website: exp.externalLink } : undefined
+        social: exp.website ? { website: exp.website } : undefined
     })),
     // 3. View more
     {

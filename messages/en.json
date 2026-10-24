@@ -36,7 +36,7 @@
     },
     "hero": {
         "greeting": "Welcome to my digital space",
-        "subtitle": "Full Stack Developer • .NET Core • Web Engineer",
+        "subtitle": "Software Developer | Full-Stack Developer",
         "cta": {
             "primary": "Explore Projects",
             "secondary": "Get in Touch",
@@ -44,13 +44,13 @@
         },
         "badge": "Available for opportunities",
         "scroll": "Scroll Down",
-        "role": "Software Engineer",
-        "description": "Building scalable systems at the intersection of <span class='text-primary font-semibold'>.NET</span>, <span class='text-secondary font-semibold'>Engineering</span>, and <span class='text-accent font-semibold'>Clean Architecture</span>."
+        "role": "Software Developer",
+        "description": "Building scalable systems at the intersection of <span class='text-primary font-semibold'>Clean Architecture</span>, <span class='text-secondary font-semibold'>Docker</span>, and <span class='text-accent font-semibold'>Enterprise APIs</span>."
     },
     "about": {
         "title": "About Me",
-        "subtitle": "Full Stack Developer & Problem Solver",
-        "description": "A passionate developer specializing in Full Stack Development and .NET ecosystem. Currently building scalable backend APIs and microservices architectures.",
+        "subtitle": "Software Developer & Full Stack Engineer",
+        "description": "A versatile Software Developer currently building scalable backend APIs and enterprise web solutions using Clean Architecture and microservices.",
         "stats": {
             "experience": "Years Learning",
             "projects": "Projects Done",
@@ -71,7 +71,7 @@
             "bridging": "Bridging complex systems with seamless user experiences.",
             "integration": "Beyond writing code, I architect full-stack ecosystems—secure backends, resilient data architectures, and scalable deployment pipelines.",
             "signature": "Charan",
-            "role": ".NET & Full Stack Developer",
+            "role": "Software Developer",
             "aboutMe": "About Me",
             "scroll": "Scroll to Explore",
             "shortStory": "My Short Story"
@@ -79,7 +79,7 @@
         "coreEngineering": {
             "label": "Core Engineering",
             "title": "Proven <span class='text-primary italic font-serif font-light lowercase'>stack.</span> <br /> Measurable <span class='italic font-serif font-light text-foreground'>results.</span>",
-            "p1": "I develop robust backend systems using .NET Core, C#, and REST APIs, structuring workflows and exposing services for seamless integration.",
+            "p1": "I develop robust backend systems using Clean Architecture, C#, and REST APIs, structuring workflows and exposing services for seamless integration.",
             "p2": "Integrated into full-stack apps with Next.js, React, and SQL Server, backed by Entity Framework.",
             "p3": "All projects use disciplined version control, Docker containerization, and are built for stable production deployment.",
             "gpa": "Academic GPA",
@@ -95,13 +95,13 @@
             },
             "web3": {
                 "title": "FRONTEND TECHNOLOGIES",
-                "desc": "Building modern interfaces with React, Next.js, and TailwindCSS. Creating seamless user experiences connected to powerful .NET backends."
+                "desc": "Building modern interfaces with React, Next.js, and TailwindCSS. Creating seamless user experiences connected to powerful scalable backends."
             }
         },
         "profile": {
             "title": "Architecting Scalable Systems <br /> Where Logic Meets Engineering.",
             "narrativeLabel": "Core Narrative",
-            "narrative": "As a passionate Full Stack Developer specializing in .NET Core and Web Technologies, I focus on building systems that bridge complex business logic with production-ready implementation.",
+            "narrative": "As a passionate Software Developer specializing in Clean Architecture and Web Technologies, I focus on building systems that bridge complex business logic with production-ready implementation.",
             "narrative2": "My work combines algorithmic thinking, backend engineering, and clean architecture to deliver solutions that are robust, reliable, and built for real-world impact.",
             "pillars": {
                 "reliable": {
@@ -138,12 +138,12 @@
             "experiencesList": [
                 {
                     "company": "AGREMATE Private Limited",
-                    "role": ".NET DEVELOPER",
+                    "role": "SOFTWARE DEVELOPER",
                     "desc": "Building scalable backend APIs and automated workflows for India's smart property management platform."
                 },
                 {
-                    "company": "NTSIPL",
-                    "role": ".NET DEVELOPER",
+                    "company": "NTSIPL / MyCard Consultancy",
+                    "role": "TRAINEE ENGINEER - DOTNET",
                     "desc": "Development on RTGS/NEFT banking project for major Banks and Vendors using Microservices Architecture."
                 }
             ],
@@ -328,7 +328,7 @@
         "faqData": [
             {
                 "q": "What is your main area of expertise?",
-                "a": "As a passionate developer, I specialize in Full-stack Development focusing on .NET Core, React, Next.js, and scalable database management."
+                "a": "As a versatile Software Developer, I specialize in full-stack engineering, Clean Architecture, React, Next.js, and scalable database management."
             },
             {
                 "q": "Are you available for freelance collaborations?",
@@ -336,11 +336,11 @@
             },
             {
                 "q": "What is your typical tech stack for production?",
-                "a": "For backend projects, I primarily use C#, .NET Core, and SQL Server. For web applications, my go-to is the React ecosystem: Next.js, TypeScript, and Tailwind CSS."
+                "a": "For backend projects, I primarily use Clean Architecture, C#, ASP.NET Core, and SQL Server. For web applications, my go-to is the React ecosystem: Next.js, TypeScript, and Tailwind CSS."
             },
             {
                 "q": "Do you have experience with enterprise projects?",
-                "a": "Yes, I've served as a Software Developer in environments like AGREMATE and NTSIPL, architecting critical RTGS/NEFT payment processing systems and API infrastructure."
+                "a": "Yes, I've served as a Software Developer in environments like AGREMATE and NTSIPL / MyCard Consultancy, architecting critical RTGS/NEFT payment processing systems and API infrastructure."
             },
             {
                 "q": "How can we start a partnership or project?",
@@ -383,8 +383,8 @@
             "scalable": "Scalable",
             "creative": "Creative"
         },
-        "ribbon1": ".NET Core • C# • React • SQL Server • Next.js • Tailwind CSS •",
-        "ribbon2": "Full Stack Developer • Backend Architecture • API Design • System Engineering •"
+        "ribbon1": "Clean Architecture • Docker • React • SQL Server • Next.js • Tailwind CSS •",
+        "ribbon2": "Software Developer • Full Stack Engineering • API Design • System Architecture •"
     },
     "stats": {
         "systemStatus": "System Status: Analytics Active",
@@ -408,7 +408,7 @@
     },
     "projectHeader": {
         "title": "Architecting Digital Solutions",
-        "subtitle": "A curated showcase of technical innovation and backend engineering. Exploring the frontiers of <span class='font-bold text-white'>.NET Core</span>, Microservices, and scalable APIs."
+        "subtitle": "A curated showcase of technical innovation and backend engineering. Exploring the frontiers of <span class='font-bold text-white'>Clean Architecture</span>, Microservices, and scalable APIs."
     },
     "common": {
         "loading": "Loading...",
@@ -481,7 +481,7 @@
             "What are your main skills?",
             "Tell me about your best project",
             "What is your work experience?",
-            "What .NET skills do you have?"
+            "What are your core engineering skills?"
         ],
         "error": "An error occurred. Please try again.",
         "invalidResponse": "Invalid response from server.",

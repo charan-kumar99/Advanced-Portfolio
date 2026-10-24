@@ -58,7 +58,7 @@ function EducationContent() {
                     </h2>
 
                     <p className={styles.eduDesc}>
-                        {education.major} major with a GPA of {education.gpa}. Focused on AI Engineering and Systems Research. Active in multiple high-impact research laboratories and national competitions.
+                        Pursuing {education.degree} in {education.major}. Focused on advanced software engineering, Clean Architecture, and enterprise web applications alongside full-time industry experience.
                     </p>
                 </div>
 
@@ -79,18 +79,18 @@ function EducationContent() {
 
                         <div className={styles.eduCardTags}>
                             <span className={styles.eduCardTagPrimary}>
-                                GPA {education.gpa}
+                                {education.degree}
                             </span>
                             <span className={styles.eduCardTagSec}>
-                                AI Researcher
+                                Software Dev
                             </span>
                             <span className={styles.eduCardTagSec}>
-                                IT Major
+                                MIT Jaipur
                             </span>
                         </div>
 
                         <p className={styles.eduCardLabel}>
-                            Digital Innovation Hub
+                            Academic Foundation
                         </p>
                     </div>
                 </motion.div>

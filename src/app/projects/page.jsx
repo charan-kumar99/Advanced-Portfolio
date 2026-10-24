@@ -726,7 +726,7 @@ export default function ProjectsPage() {
 
     const categories = [
         { id: 'All', label: 'All Projects', icon: Globe },
-        { id: 'Full Stack', label: 'Full Stack & .NET', icon: Database },
+        { id: 'Full Stack', label: 'Full Stack & Backend', icon: Database },
         { id: 'AI', label: 'Artificial Intelligence', icon: Brain },
         { id: 'More', label: 'More', icon: Layers },
     ];
